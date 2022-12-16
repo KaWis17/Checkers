@@ -8,6 +8,7 @@ import org.example.Client.Model.SpecificModel;
 import org.example.Client.View.GameWindow.Chat.ChatPanel;
 import org.example.Client.View.GameWindow.GameFrame;
 import org.example.Client.View.GameWindow.Stats.StatsPanel;
+import org.example.CommandMatching;
 
 
 public class SpecificController extends AbstractController {
@@ -19,14 +20,16 @@ public class SpecificController extends AbstractController {
   }
 
   public void processCommand(String line){
-    if(line.matches("Changed name to: (.*)")){
-
+    if(CommandMatching.matchesNameChanged(line)){
       ((SpecificController)client.controller).setModelPlayer(line.substring(17)+": ");
       ((StatsPanel)view.download(1).download(1)).setPlayer1(line.substring(17));
     }
-    if(line.matches("/othername (.*)"))
-    {
+    if(CommandMatching.matchesOtherNameCommand(line)){
+
       ((StatsPanel)view.download(1).download(1)).setPlayer2(line.substring(11));
+    }
+    if(CommandMatching.matchesPrintCommand(line)){
+      ((ChatPanel)((GameFrame)view).download(1).download(3)).addText(((SpecificModel)model).printBoard());
     }
     ((ChatPanel)((GameFrame)view).download(1).download(3)).addText(line);
     //System.out.println(in.readLine());

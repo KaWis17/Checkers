@@ -1,5 +1,7 @@
 package org.example.Server;
 
+import org.example.CommandMatching;
+
 import java.io.*;
 import java.net.Socket;
 
@@ -35,20 +37,23 @@ public class ServerThread extends Thread{
   }
 
   private void processCommand(String line) {
-    if(matchesNameCommand(line)){
+    if(CommandMatching.matchesNameCommand(line)){
       nameCommand(line);
     }
+    if(CommandMatching.matchesPrintCommand(line)){
+      printCommand();
+    }
     System.out.println(line);
-  }
-
-  private static boolean matchesNameCommand(String line) {
-    return line.matches("/name (.*)") || line.matches("(.*): /name (.*)");
   }
 
   private void nameCommand(String line){
     String newName= line.substring(line.indexOf(':')+7);
     sendToOther("/othername "+newName);
     out.println("Changed name to: "+newName);
+  }
+
+  private void printCommand(){
+
   }
 
 protected void send(String message){

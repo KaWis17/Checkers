@@ -4,7 +4,7 @@ import java.awt.event.ActionListener;
 import org.example.Client.Model.AbstractModel;
 
 public interface View {
-  AbstractModel model = null;
+  //AbstractModel model = null;
 
   public void display();
 

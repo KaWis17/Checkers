@@ -2,11 +2,10 @@ package org.example.Client.View.GameWindow.Chat;
 
 import java.awt.*;
 import java.awt.event.ActionListener;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
 import javax.swing.JPanel;
-import javax.swing.JTextArea;
+
 import org.example.Client.View.View;
+import org.example.CommandMatching;
 
 public class ChatPanel extends JPanel implements View {
   private ChatArea area;
@@ -29,7 +28,7 @@ public class ChatPanel extends JPanel implements View {
   }
 
 private static boolean isCommand(String text) {
-  return text.matches("/(.*)") || text.matches("(.*): /(.*)");
+  return CommandMatching.isCommand(text);
 }
 
 @Override
