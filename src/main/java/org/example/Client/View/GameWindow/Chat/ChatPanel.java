@@ -24,6 +24,7 @@ public class ChatPanel extends JPanel implements View {
   }
 
   public void addText(String text){
+    if(!text.matches("/(.*)"))
     area.append(text +"\n");
   }
 

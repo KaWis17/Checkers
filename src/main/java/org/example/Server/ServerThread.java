@@ -22,6 +22,10 @@ public class ServerThread extends Thread{
       String line;
       do {
         line = in.readLine();
+        if(line.matches("/name (.*)")){
+
+          out.println("Changed name to: "+line.substring(6));
+        }
         System.out.println(line);
         send(line);
 
@@ -36,6 +40,7 @@ public class ServerThread extends Thread{
 
   protected void send(String message){
     for(ServerThread thread : Server.threads)
-      thread.out.println("-> ("+message+")");
+      //thread.out.println(threadName+"-> ("+message+")");
+      thread.out.println(message);
   }
 }

@@ -30,16 +30,20 @@ public class SpecificController extends AbstractController {
 
       @Override
       public void keyPressed(KeyEvent e) {
-        if(e.getKeyCode() == KeyEvent.VK_ENTER){
+        if(e.getKeyCode() == KeyEvent.VK_ESCAPE){
           String text = write.getText();
           write.setText("");
-          client.send(((SpecificModel)model).getPlayer()+": "+text);
+          client.send(text);
         }
       }
 
       @Override
       public void keyReleased(KeyEvent e) {}
     });
+  }
+
+  public void setModelPlayer(String name){
+    ((SpecificModel)model).setPlayer(name);
   }
 }
 

@@ -1,10 +1,7 @@
 package org.example.Client.Model;
 
 public class SpecificModel extends AbstractModel {
-  String player;
-  public SpecificModel(String player){
-    this.player = player;
-  }
+  String player="";
 
   public String getPlayer() {
     return player;

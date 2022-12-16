@@ -2,13 +2,11 @@ package org.example.Client;
 
 import java.io.*;
 import java.net.Socket;
-import javax.swing.JTextArea;
-import javax.swing.JTextField;
+
 import org.example.Client.Controller.AbstractController;
 import org.example.Client.Controller.SpecificController;
 import org.example.Client.Model.AbstractModel;
 import org.example.Client.Model.SpecificModel;
-import org.example.Client.View.GameMenu.MenuFrame;
 import org.example.Client.View.GameWindow.Chat.ChatPanel;
 import org.example.Client.View.GameWindow.GameFrame;
 import org.example.Client.View.View;
@@ -19,13 +17,17 @@ public class Client {
   private static PrintWriter out;
   private static BufferedReader bufferRead;
 
-  public View view;
+  private View view;
+
+  private AbstractModel model;
+
+  private AbstractController controller;
 
   public void main(){
     view = new GameFrame();
-    AbstractController controller = new SpecificController(this);
+    controller = new SpecificController(this);
     //new MenuFrame();
-    AbstractModel model = new SpecificModel("Player");
+    model = new SpecificModel();
 
     controller.setModel(model);
     controller.setView(view);
@@ -42,9 +44,10 @@ public class Client {
       in = new BufferedReader(new InputStreamReader(s1.getInputStream()));
       bufferRead = new BufferedReader(new InputStreamReader(System.in));
 
-      new Receive(in, view).start();
+      new Receive(in, view, controller).start();
       do{
-        send(bufferRead.readLine());
+        String line=bufferRead.readLine();
+        send(line);
       } while(true);
     }
     catch (IOException e){
@@ -54,14 +57,18 @@ public class Client {
     }
   }
   public void send(String message){
-    out.println(message);
+    out.println(((SpecificModel)model).getPlayer()+message);
   }
 }
 
 class Receive extends Thread{
   BufferedReader in;
   View view;
-  Receive(BufferedReader in, View view){
+
+  AbstractController controller;
+
+  Receive(BufferedReader in, View view, AbstractController controller){
+    this.controller=controller;
     this.view = view;
     this.in = in;
   }
@@ -69,7 +76,11 @@ class Receive extends Thread{
   public void run(){
     try {
       while(true){
-        ((ChatPanel)((GameFrame)view).download(1).download(3)).addText(in.readLine());
+        String line=in.readLine();
+        if(line.matches("Changed name to: (.*)")){
+          ((SpecificController)controller).setModelPlayer(line.substring(17));
+        }
+        ((ChatPanel)((GameFrame)view).download(1).download(3)).addText(line);
         //System.out.println(in.readLine());
       }
     } catch (IOException e) {
