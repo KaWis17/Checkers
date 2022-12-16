@@ -22,7 +22,7 @@ public class Client {
 
   private AbstractModel model;
 
-  private AbstractController controller;
+  public AbstractController controller;
 
   public void main(){
     view = new GameFrame();
@@ -78,17 +78,7 @@ class Receive extends Thread{
     try {
       while(true){
         String line=in.readLine();
-        if(line.matches("Changed name to: (.*)")){
-
-          ((SpecificController)controller).setModelPlayer(line.substring(17)+": ");
-          ((StatsPanel)view.download(1).download(1)).setPlayer1(line.substring(17));
-        }
-        if(line.matches("/othername (.*)"))
-        {
-          ((StatsPanel)view.download(1).download(1)).setPlayer2(line.substring(11));
-        }
-        ((ChatPanel)((GameFrame)view).download(1).download(3)).addText(line);
-        //System.out.println(in.readLine());
+        ((SpecificController)controller).processCommand(line);
       }
     } catch (IOException e) {
       throw new RuntimeException(e);

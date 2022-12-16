@@ -5,6 +5,9 @@ import java.awt.event.KeyListener;
 import javax.swing.JTextArea;
 import org.example.Client.Client;
 import org.example.Client.Model.SpecificModel;
+import org.example.Client.View.GameWindow.Chat.ChatPanel;
+import org.example.Client.View.GameWindow.GameFrame;
+import org.example.Client.View.GameWindow.Stats.StatsPanel;
 
 
 public class SpecificController extends AbstractController {
@@ -15,13 +18,25 @@ public class SpecificController extends AbstractController {
       this.client=client;
   }
 
+  public void processCommand(String line){
+    if(line.matches("Changed name to: (.*)")){
+
+      ((SpecificController)client.controller).setModelPlayer(line.substring(17)+": ");
+      ((StatsPanel)view.download(1).download(1)).setPlayer1(line.substring(17));
+    }
+    if(line.matches("/othername (.*)"))
+    {
+      ((StatsPanel)view.download(1).download(1)).setPlayer2(line.substring(11));
+    }
+    ((ChatPanel)((GameFrame)view).download(1).download(3)).addText(line);
+    //System.out.println(in.readLine());
+  }
+
   public void initGame(){
-    System.out.println("TUTAJ DZIAŁA");
     client.initConnection(4444);
   }
 
   public void chat(){
-    System.out.println("TEST");
     JTextArea write = ((JTextArea)(view.download(1).download(3)).download(2));
 
     write.addKeyListener(new KeyListener() {

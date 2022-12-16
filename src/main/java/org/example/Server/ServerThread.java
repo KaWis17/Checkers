@@ -22,12 +22,7 @@ public class ServerThread extends Thread{
       String line;
       do {
         line = in.readLine();
-        if(line.matches("/name (.*)")||line.matches("(.*): /name (.*)")){
-          String newName=line.substring(line.indexOf(':')+7);
-          sendToOther("/othername "+newName);
-          out.println("Changed name to: "+newName);
-        }
-        System.out.println(line);
+        processCommand(line);
         send(line);
 
       } while (!line.equals("bye"));
@@ -39,7 +34,24 @@ public class ServerThread extends Thread{
     }
   }
 
-  protected void send(String message){
+  private void processCommand(String line) {
+    if(matchesNameCommand(line)){
+      nameCommand(line);
+    }
+    System.out.println(line);
+  }
+
+  private static boolean matchesNameCommand(String line) {
+    return line.matches("/name (.*)") || line.matches("(.*): /name (.*)");
+  }
+
+  private void nameCommand(String line){
+    String newName= line.substring(line.indexOf(':')+7);
+    sendToOther("/othername "+newName);
+    out.println("Changed name to: "+newName);
+  }
+
+protected void send(String message){
     for(ServerThread thread : Server.threads)
       thread.out.println(message);
   }
