@@ -10,11 +10,16 @@ import org.example.Client.View.View;
 
 public class StatsPanel extends JPanel implements View {
 private View portInfo;
+
+//later change to match composite
+private JTextArea player1=new JTextArea("player1");
+private JTextArea player2=new JTextArea("player2");
+
   public StatsPanel(){
     setBackground(Color.red);
     setLayout(new GridLayout(2,1));
-    add(new JPanel());
-    add(new JPanel());
+    add(player2);
+    add(player1);
   }
 
   @Override
@@ -40,5 +45,13 @@ private View portInfo;
   @Override
   public View download(int i) {
     return portInfo;
+  }
+
+  public void setPlayer1(String name) {
+    player1.setText(name);
+  }
+
+  public void setPlayer2(String name) {
+    player2.setText(name);
   }
 }

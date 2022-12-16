@@ -45,5 +45,9 @@ public class SpecificController extends AbstractController {
   public void setModelPlayer(String name){
     ((SpecificModel)model).setPlayer(name);
   }
+
+  public String getModelPlayer(){
+    return ((SpecificModel)model).getPlayer();
+  }
 }
 

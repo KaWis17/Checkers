@@ -22,9 +22,10 @@ public class ServerThread extends Thread{
       String line;
       do {
         line = in.readLine();
-        if(line.matches("/name (.*)")){
-
-          out.println("Changed name to: "+line.substring(6));
+        if(line.matches("/name (.*)")||line.matches("(.*): /name (.*)")){
+          String newName=line.substring(line.indexOf(':')+7);
+          sendToOther("/othername "+newName);
+          out.println("Changed name to: "+newName);
         }
         System.out.println(line);
         send(line);
@@ -40,7 +41,13 @@ public class ServerThread extends Thread{
 
   protected void send(String message){
     for(ServerThread thread : Server.threads)
-      //thread.out.println(threadName+"-> ("+message+")");
       thread.out.println(message);
+  }
+
+  protected void sendToOther(String message){
+    for(ServerThread thread : Server.threads)
+      if(thread!=this){
+        thread.out.println(message);
+      }
   }
 }

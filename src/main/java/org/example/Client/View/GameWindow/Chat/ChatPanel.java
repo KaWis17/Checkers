@@ -24,11 +24,15 @@ public class ChatPanel extends JPanel implements View {
   }
 
   public void addText(String text){
-    if(!text.matches("/(.*)"))
+    if(!isCommand(text))
     area.append(text +"\n");
   }
 
-  @Override
+private static boolean isCommand(String text) {
+  return text.matches("/(.*)") || text.matches("(.*): /(.*)");
+}
+
+@Override
   public void display() {
 
   }

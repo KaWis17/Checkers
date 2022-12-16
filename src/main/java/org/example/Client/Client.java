@@ -9,6 +9,7 @@ import org.example.Client.Model.AbstractModel;
 import org.example.Client.Model.SpecificModel;
 import org.example.Client.View.GameWindow.Chat.ChatPanel;
 import org.example.Client.View.GameWindow.GameFrame;
+import org.example.Client.View.GameWindow.Stats.StatsPanel;
 import org.example.Client.View.View;
 
 public class Client {
@@ -78,7 +79,13 @@ class Receive extends Thread{
       while(true){
         String line=in.readLine();
         if(line.matches("Changed name to: (.*)")){
-          ((SpecificController)controller).setModelPlayer(line.substring(17));
+
+          ((SpecificController)controller).setModelPlayer(line.substring(17)+": ");
+          ((StatsPanel)view.download(1).download(1)).setPlayer1(line.substring(17));
+        }
+        if(line.matches("/othername (.*)"))
+        {
+          ((StatsPanel)view.download(1).download(1)).setPlayer2(line.substring(11));
         }
         ((ChatPanel)((GameFrame)view).download(1).download(3)).addText(line);
         //System.out.println(in.readLine());
