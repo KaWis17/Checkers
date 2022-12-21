@@ -1,10 +1,13 @@
 package org.example.Client.Controller;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import javax.swing.JTextArea;
 import org.example.Client.Client;
 import org.example.Client.Model.SpecificModel;
+import org.example.Client.View.GameWindow.Board.Tile;
 import org.example.Client.View.GameWindow.Chat.ChatPanel;
 import org.example.Client.View.GameWindow.GameFrame;
 import org.example.Client.View.GameWindow.Stats.StatsPanel;
@@ -59,7 +62,22 @@ public class SpecificController extends AbstractController {
   }
 
   private void executeNotify() {
-    //TODO: Implement notify
+    String board = (((SpecificModel)model).printBoard());
+    for(int i=0; i<8; i++){
+      for(int j=0; j<8; j++){
+        Tile tile = ((Tile)view.download(1).download(2).download(i*8+j));
+        int location = ((i * 8) + j) * 4 + i;
+        char color = board.charAt(location +1);
+        int state = Character.getNumericValue(board.charAt(location +2));
+        boolean picked = board.charAt(location)=='{';
+
+        tile.setColor(color);
+        if(picked) tile.setColor('y');
+        tile.setState(state);
+
+      }
+    }
+
   }
 
   private void executePick(String line) {
@@ -67,7 +85,6 @@ public class SpecificController extends AbstractController {
     int x = parseInt(String.valueOf(line.charAt(0)));
     int y = parseInt(String.valueOf(line.charAt(2)));
     ((SpecificModel)model).pick(x,y);
-    client.send(": /localprint"); //TODO: remove after implementation
     client.send(": /localnotify");
   }
 
@@ -76,7 +93,6 @@ public class SpecificController extends AbstractController {
     int x = parseInt(String.valueOf(line.charAt(0)));
     int y = parseInt(String.valueOf(line.charAt(2)));
     ((SpecificModel)model).put(x,y);
-    client.send(": /localprint"); //TODO: remove after implementation
     client.send(": /localnotify");
   }
 
@@ -105,6 +121,23 @@ public class SpecificController extends AbstractController {
       @Override
       public void keyReleased(KeyEvent e) {}
     });
+  }
+
+  public void tileListener(){
+    //TODO: Interpelacja do dr. Macyny
+    for(int i=0; i<8; i++){
+      for(int j=0; j<8; j++){
+        Tile tile = ((Tile)view.download(1).download(2).download(i*8+j));
+        tile.addAction(e -> {
+          if(((SpecificModel)model).getPicked() == null){
+            client.send(": /pick "+ tile.getPlace()/8+" "+ tile.getPlace()%8);
+          }
+          else{
+            client.send(": /put "+ tile.getPlace()/8+" "+ tile.getPlace()%8);
+          }
+        });
+      }
+    }
   }
 
   public void setModelPlayer(String name){

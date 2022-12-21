@@ -13,12 +13,13 @@ import org.example.Client.View.View;
 public class GamePanel extends JPanel implements View {
 
   private StatsPanel statsPanel;
+  private BoardPanel boardPanel;
   private ChatPanel chatPanel;
   GamePanel(){
     setBackground(Color.BLUE);
     setLayout(new BorderLayout());
     add(statsPanel = new StatsPanel(), BorderLayout.WEST);
-    add(new BoardPanel(), BorderLayout.CENTER);
+    add(boardPanel = new BoardPanel(), BorderLayout.CENTER);
     add(chatPanel = new ChatPanel(), BorderLayout.EAST);
   }
 
@@ -45,6 +46,7 @@ public class GamePanel extends JPanel implements View {
   @Override
   public View download(int i) {
     if(i==1) return statsPanel;
+    if(i==2) return boardPanel;
     if(i==3) return chatPanel;
     return null;
   }

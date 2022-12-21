@@ -39,7 +39,7 @@ public class ServerThread extends Thread{
   private void processCommand(String line) {
     this.out.println(line);
     sendToOther(CommandMatching.changeLocalToOther(line));
-    //System.out.println(line);
+    System.out.println(line);
   }
 
   protected void sendToOther(String message){

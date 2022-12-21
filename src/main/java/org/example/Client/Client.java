@@ -27,15 +27,15 @@ public class Client {
 
   public void main(){
     view = new GameFrame();
-    controller = new SpecificController(this);
-    //new MenuFrame();
     model = new SpecificModel();
+    controller = new SpecificController(this);
 
     controller.setModel(model);
     controller.setView(view);
     model.setView(view);
 
     ((SpecificController)controller).chat();
+    ((SpecificController)controller).tileListener();
     ((SpecificController)controller).initGame();
   }
 
