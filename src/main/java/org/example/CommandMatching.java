@@ -12,6 +12,11 @@ public class CommandMatching {
         return line.matches(regex);
     }
 
+    public static boolean matchesCommand(String line, String commandName1,String commandName2)
+    {
+        return matchesCommand(line,commandName1) || matchesCommand(line,commandName2);
+    }
+
     public static String changeLocalToOther(String line)
     {
         line=line.replaceAll(": /local",": /other");

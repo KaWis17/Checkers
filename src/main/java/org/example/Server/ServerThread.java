@@ -42,11 +42,6 @@ public class ServerThread extends Thread{
     //System.out.println(line);
   }
 
-protected void send(String message){
-    for(ServerThread thread : Server.threads)
-      thread.out.println(message);
-  }
-
   protected void sendToOther(String message){
     for(ServerThread thread : Server.threads)
       if(thread!=this){

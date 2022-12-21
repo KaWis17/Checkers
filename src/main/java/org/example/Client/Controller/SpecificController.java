@@ -10,6 +10,8 @@ import org.example.Client.View.GameWindow.GameFrame;
 import org.example.Client.View.GameWindow.Stats.StatsPanel;
 import org.example.CommandMatching;
 
+import static java.lang.Integer.parseInt;
+
 
 public class SpecificController extends AbstractController {
 
@@ -21,18 +23,42 @@ public class SpecificController extends AbstractController {
 
   public void processCommand(String line){
     if(CommandMatching.matchesCommand(line,"localname")){
-      String name = line.replaceAll("(.*): /localname ", "");
-      ((SpecificController)client.controller).setModelPlayer(name +": ");
-      ((StatsPanel)view.download(1).download(1)).setPlayer1(name);
+      executeLocalName(line);
     }
     if(CommandMatching.matchesCommand(line,"othername")){
-      ((StatsPanel)view.download(1).download(1)).setPlayer2(line.replaceAll("(.*): /othername ",""));
+      executeOtherName(line);
     }
-    if(CommandMatching.matchesCommand(line,"print")){
-      ((ChatPanel)((GameFrame)view).download(1).download(3)).addText(((SpecificModel)model).printBoard());
+    if(CommandMatching.matchesCommand(line,"print","localprint")){
+      executePrint();
+    }
+    if(CommandMatching.matchesCommand(line,"pick")){
+      executePick(line);
     }
     ((ChatPanel)((GameFrame)view).download(1).download(3)).addText(line);
     //System.out.println(in.readLine());
+  }
+
+  private void executeLocalName(String line) {
+    String name = line.replaceAll("(.*): /localname ", "");
+    ((SpecificController)client.controller).setModelPlayer(name +": ");
+    ((StatsPanel)view.download(1).download(1)).setPlayer1(name);
+  }
+
+  private void executeOtherName(String line) {
+    ((StatsPanel)view.download(1).download(1)).setPlayer2(line.replaceAll("(.*): /othername ",""));
+  }
+
+  private void executePrint() {
+    ((ChatPanel)((GameFrame)view).download(1).download(3)).addText(((SpecificModel)model).printBoard());
+  }
+
+  private void executePick(String line) {
+    line=line.replaceAll("(.*): /pick ","");
+    System.out.println("tutaj");
+    int x = parseInt(String.valueOf(line.charAt(0)));
+    int y = parseInt(String.valueOf(line.charAt(2)));
+    ((SpecificModel)model).pick(x,y);
+    client.send(": /localprint");
   }
 
   public void initGame(){
