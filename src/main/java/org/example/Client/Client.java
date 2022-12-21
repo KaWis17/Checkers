@@ -11,6 +11,7 @@ import org.example.Client.View.GameWindow.Chat.ChatPanel;
 import org.example.Client.View.GameWindow.GameFrame;
 import org.example.Client.View.GameWindow.Stats.StatsPanel;
 import org.example.Client.View.View;
+import org.example.CommandMatching;
 
 public class Client {
 

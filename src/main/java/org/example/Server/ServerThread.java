@@ -25,7 +25,7 @@ public class ServerThread extends Thread{
       do {
         line = in.readLine();
         processCommand(line);
-        send(line);
+        //send(line);
 
       } while (!line.equals("bye"));
       socket.close();
@@ -37,23 +37,9 @@ public class ServerThread extends Thread{
   }
 
   private void processCommand(String line) {
-    if(CommandMatching.matchesNameCommand(line)){
-      nameCommand(line);
-    }
-    if(CommandMatching.matchesPrintCommand(line)){
-      printCommand();
-    }
-    System.out.println(line);
-  }
-
-  private void nameCommand(String line){
-    String newName= line.substring(line.indexOf(':')+7);
-    sendToOther("/othername "+newName);
-    out.println("Changed name to: "+newName);
-  }
-
-  private void printCommand(){
-
+    this.out.println(line);
+    sendToOther(CommandMatching.changeLocalToOther(line));
+    //System.out.println(line);
   }
 
 protected void send(String message){

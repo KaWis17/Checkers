@@ -20,15 +20,15 @@ public class SpecificController extends AbstractController {
   }
 
   public void processCommand(String line){
-    if(CommandMatching.matchesNameChanged(line)){
-      ((SpecificController)client.controller).setModelPlayer(line.substring(17)+": ");
-      ((StatsPanel)view.download(1).download(1)).setPlayer1(line.substring(17));
+    if(CommandMatching.matchesCommand(line,"localname")){
+      String name = line.replaceAll("(.*): /localname ", "");
+      ((SpecificController)client.controller).setModelPlayer(name +": ");
+      ((StatsPanel)view.download(1).download(1)).setPlayer1(name);
     }
-    if(CommandMatching.matchesOtherNameCommand(line)){
-
-      ((StatsPanel)view.download(1).download(1)).setPlayer2(line.substring(11));
+    if(CommandMatching.matchesCommand(line,"othername")){
+      ((StatsPanel)view.download(1).download(1)).setPlayer2(line.replaceAll("(.*): /othername ",""));
     }
-    if(CommandMatching.matchesPrintCommand(line)){
+    if(CommandMatching.matchesCommand(line,"print")){
       ((ChatPanel)((GameFrame)view).download(1).download(3)).addText(((SpecificModel)model).printBoard());
     }
     ((ChatPanel)((GameFrame)view).download(1).download(3)).addText(line);
@@ -51,6 +51,8 @@ public class SpecificController extends AbstractController {
         if(e.getKeyCode() == KeyEvent.VK_ESCAPE){
           String text = write.getText();
           write.setText("");
+          if(CommandMatching.isCommand(text))
+          processCommand(text);
           client.send(text);
         }
       }

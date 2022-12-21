@@ -3,7 +3,7 @@ package org.example.Client.Model;
 public class SpecificModel extends AbstractModel {
 
   Tile[][] board = new Tile[8][8];
-  String player="";
+  String player="Anon: ";
 
   public SpecificModel() {
     createBoard();
