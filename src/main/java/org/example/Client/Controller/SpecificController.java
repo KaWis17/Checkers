@@ -31,8 +31,14 @@ public class SpecificController extends AbstractController {
     if(CommandMatching.matchesCommand(line,"print","localprint")){
       executePrint();
     }
+    if(CommandMatching.matchesCommand(line,"notify","localnotify")){
+      executeNotify();
+    }
     if(CommandMatching.matchesCommand(line,"pick")){
       executePick(line);
+    }
+    if(CommandMatching.matchesCommand(line,"put")){
+      executePut(line);
     }
     ((ChatPanel)((GameFrame)view).download(1).download(3)).addText(line);
     //System.out.println(in.readLine());
@@ -52,13 +58,26 @@ public class SpecificController extends AbstractController {
     ((ChatPanel)((GameFrame)view).download(1).download(3)).addText(((SpecificModel)model).printBoard());
   }
 
+  private void executeNotify() {
+    //TODO: Implement notify
+  }
+
   private void executePick(String line) {
     line=line.replaceAll("(.*): /pick ","");
-    System.out.println("tutaj");
     int x = parseInt(String.valueOf(line.charAt(0)));
     int y = parseInt(String.valueOf(line.charAt(2)));
     ((SpecificModel)model).pick(x,y);
-    client.send(": /localprint");
+    client.send(": /localprint"); //TODO: remove after implementation
+    client.send(": /localnotify");
+  }
+
+  private void executePut(String line) {
+    line=line.replaceAll("(.*): /put ","");
+    int x = parseInt(String.valueOf(line.charAt(0)));
+    int y = parseInt(String.valueOf(line.charAt(2)));
+    ((SpecificModel)model).put(x,y);
+    client.send(": /localprint"); //TODO: remove after implementation
+    client.send(": /localnotify");
   }
 
   public void initGame(){
