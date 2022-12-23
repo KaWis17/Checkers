@@ -7,7 +7,6 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="Warcaby" />
-        <module name="WarcabyV2" />
         <module name="WarcabyV2-master" />
       </profile>
     </annotationProcessing>

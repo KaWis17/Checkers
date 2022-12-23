@@ -5,7 +5,7 @@ public class Tile {
     private boolean isPicked;
     private TileState state;
 
-    Tile(boolean isWhite,TileState state){
+    public Tile(boolean isWhite, TileState state){
         this.isWhite=isWhite;
         this.state=state;
         isPicked=false;

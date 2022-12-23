@@ -1,29 +1,25 @@
 package org.example.Client.Model;
 
-public class SpecificModel extends AbstractModel {
+import org.example.Client.Model.Rules.Board;
+import org.example.Client.Model.Rules.ClassicRules;
+import org.example.Client.Model.Rules.Rules;
+import org.example.Vector2;
 
-  Tile[][] board = new Tile[8][8];
+public class SpecificModel extends AbstractModel {
+  Rules rules;
+  Board board;
   String player="Anon: ";
 
   public SpecificModel() {
-    createBoard();
-  }
-
-  private void createBoard() {
-    for(int i = 0; i < 8; i++){
-      for(int j = 0; j < 8; j++){
-        board[i][j] = new Tile((i+j)%2==0,TileState.EMPTY);
-        if(i<2 && !board[i][j].isWhite()) board[i][j].setState(TileState.PON_1);
-        if(i>5 && !board[i][j].isWhite()) board[i][j].setState(TileState.PON_2);
-      }
-    }
+    board = new Board();
+    rules = new ClassicRules();
   }
 
   public String printBoard() {
     StringBuilder result= new StringBuilder();
     for(int i = 0; i < 8; i++){
       for(int j = 0; j < 8; j++){
-        result.append(board[i][j].getTileCode());
+        result.append(board.getTiles()[i][j].getTileCode());
       }
       result.append("\n");
     }
@@ -31,32 +27,11 @@ public class SpecificModel extends AbstractModel {
   }
 
   public void pick(int x, int y) {
-    if(board[x][y].getState() == TileState.EMPTY)
-      return;
-    for(int i = 0; i < 8; i++){
-      for(int j = 0; j < 8; j++){
-        board[i][j].setPicked( (x == i && y == j) );
-      }
-    }
-  }
-
-  public Tile getPicked() {
-    for(int i=0;i<8;i++)
-    {
-      for(int j=0;j<8;j++) {
-        if(board[i][j].isPicked()) return board[i][j];
-      }
-    }
-    return null;
+    rules.pick(new Vector2(x,y),board);
   }
 
   public void put(int x, int y) {
-    if(board[x][y].getState() != TileState.EMPTY)
-      return;
-    Tile picked = getPicked();
-    board[x][y].setState(picked.getState());
-    picked.setPicked(false);
-    picked.setState(TileState.EMPTY);
+    rules.put(new Vector2(x,y),board);
   }
 
   public String getPlayer() {
@@ -65,6 +40,10 @@ public class SpecificModel extends AbstractModel {
 
   public void setPlayer(String player) {
       this.player = player;
+  }
+
+  public Board board(){
+    return board;
   }
 }
 

@@ -129,7 +129,7 @@ public class SpecificController extends AbstractController {
       for(int j=0; j<8; j++){
         Tile tile = ((Tile)view.download(1).download(2).download(i*8+j));
         tile.addAction(e -> {
-          if(((SpecificModel)model).getPicked() == null){
+          if(((SpecificModel)model).board().getPicked() == null){
             client.send(": /pick "+ tile.getPlace()/8+" "+ tile.getPlace()%8);
           }
           else{
