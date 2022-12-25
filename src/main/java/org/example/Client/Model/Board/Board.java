@@ -40,24 +40,17 @@ public abstract class Board {
         return getTile(pickedPos).getState().ordinal() % 2 == getTile(chosenPos).getState().ordinal() % 2;
     }
 
-    public boolean emptyLineBetween(Vector2 pickedPos, Vector2 chosenPos) {
-        return (emptyHorizontalLine(pickedPos,chosenPos)) || (emptyVerticalLine(pickedPos,chosenPos));
-    }
-
-    public boolean emptyHorizontalLine(Vector2 pickedPos, Vector2 chosenPos) {
-        if(pickedPos.getY() != chosenPos.getY()) return false;
-        for(int i=Math.min(pickedPos.getX(),chosenPos.getX())+1; i<Math.max(pickedPos.getX(), chosenPos.getX()); i++){
-            if(getTile(i, pickedPos.getY()).getState()!=TileState.EMPTY) return false;
+    public boolean emptyLine(Vector2 pickedPos, Vector2 chosenPos, Vector2 step) {
+        Vector2 stepDimensions = step.normalized();
+        Vector2 current = new Vector2(pickedPos.getX(), pickedPos.getY());
+        current.add(stepDimensions);
+        while(current.getX()!=chosenPos.getX() || current.getY()!=chosenPos.getY())
+        {
+            if(getTile(current.getX(), current.getY()).getState()!=TileState.EMPTY) return false;
+            current.add(stepDimensions);
         }
-        return true;
-    }
-
-    public boolean emptyVerticalLine(Vector2 pickedPos, Vector2 chosenPos) {
-        if(pickedPos.getX() != chosenPos.getX()) return false;
-        for(int i=Math.min(pickedPos.getY(),chosenPos.getY())+1; i<Math.max(pickedPos.getY(), chosenPos.getY()); i++){
-            if(getTile(pickedPos.getX(),i).getState()!=TileState.EMPTY) return false;
-        }
-        return true;
+        return (current.getX()==chosenPos.getX() && current.getY()==chosenPos.getY()) ||
+                opponents(getTile(current).getState(),getPicked().getState());
     }
 
     public boolean foundEmpty(Vector2 chosenPos) {

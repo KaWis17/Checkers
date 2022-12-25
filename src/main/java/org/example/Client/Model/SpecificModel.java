@@ -1,7 +1,7 @@
 package org.example.Client.Model;
 
 import org.example.Client.Model.Board.Board;
-import org.example.Client.Model.Board.ThreeRowsBoard;
+import org.example.Client.Model.Board.nRowsBoard;
 import org.example.Client.Model.Rules.ClassicRules;
 import org.example.Client.Model.Rules.Rules;
 import org.example.Vector2;
@@ -12,7 +12,7 @@ public class SpecificModel extends AbstractModel {
   String player="Anon: ";
 
   public SpecificModel() {
-    board = new ThreeRowsBoard();
+    board = new nRowsBoard(3);
     rules = new ClassicRules();
   }
 

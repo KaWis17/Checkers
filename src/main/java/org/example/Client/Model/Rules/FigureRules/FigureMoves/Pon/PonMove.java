@@ -7,25 +7,21 @@ import org.example.Client.Model.TileState;
 import org.example.Vector2;
 
 public class PonMove extends FigureMove {
+
     @Override
-    public boolean canMove(Vector2 chosenPos, Board board) {
-        return board.getPickedPos().areOnShortDiagonal(chosenPos) &&
-                board.foundEmpty(chosenPos) && canMovePonFurther(chosenPos,board);
+    public boolean canMove(Vector2 chosenPos, Board board){
+        Vector2 pickedPos = board.getPickedPos();
+        Vector2 destination = new Vector2(chosenPos.getX() - pickedPos.getX(), chosenPos.getY() - pickedPos.getY());
+        return  validDestination(destination) && board.foundEmpty(chosenPos);
+    }
+
+    public PonMove(Vector2[] normalizedDirections) {
+        super(normalizedDirections);
     }
 
     @Override
     public void move(Vector2 chosenPos, Board board) {
-        Tile picked = board.getPicked();
-        board.getTile(chosenPos).setState(picked.getState());
+        super.move(chosenPos,board);
         board.changePonsToQueens();
-        picked.setPicked(false);
-        picked.setState(TileState.EMPTY);
-    }
-
-    private boolean canMovePonFurther(Vector2 chosenPos, Board board) {
-        Vector2 pickedPos = board.getPickedPos();
-        Tile picked=board.getPicked();
-        return  (chosenPos.getX() - pickedPos.getX() > 0 && picked.getState() == TileState.PON_1 ) ||
-                (chosenPos.getX() - pickedPos.getX() < 0 && picked.getState() == TileState.PON_2 );
     }
 }
