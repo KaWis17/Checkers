@@ -7,11 +7,8 @@ import org.example.Client.Controller.AbstractController;
 import org.example.Client.Controller.SpecificController;
 import org.example.Client.Model.AbstractModel;
 import org.example.Client.Model.SpecificModel;
-import org.example.Client.View.GameWindow.Chat.ChatPanel;
 import org.example.Client.View.GameWindow.GameFrame;
-import org.example.Client.View.GameWindow.Stats.StatsPanel;
 import org.example.Client.View.View;
-import org.example.CommandMatching;
 
 public class Client {
 
@@ -59,7 +56,7 @@ public class Client {
     }
   }
   public void send(String message){
-    out.println(((SpecificModel)model).getPlayer()+message);
+    out.println(((SpecificModel)model).getPlayerName()+message);
   }
 }
 

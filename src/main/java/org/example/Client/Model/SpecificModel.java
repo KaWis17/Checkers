@@ -9,13 +9,15 @@ import org.example.Vector2;
 public class SpecificModel extends AbstractModel {
   Rules rules;
   Board board;
-  String player="Anon: ";
+  Player player;
 
   public SpecificModel() {
     board = new nRowsBoard(3);
     rules = new ClassicRules();
+    player = new Player("Anon",false);
   }
 
+  //TODO: move to board
   public String printBoard() {
     StringBuilder result= new StringBuilder();
     for(int i = 0; i < 8; i++){
@@ -35,16 +37,24 @@ public class SpecificModel extends AbstractModel {
     rules.put(new Vector2(x,y),board);
   }
 
-  public String getPlayer() {
-        return player;
+  public String getPlayerName() {
+        return player.getName();
   }
 
-  public void setPlayer(String player) {
-      this.player = player;
+  public void setPlayerName(String playerName) {
+      player.setName(playerName);
   }
 
   public Board getBoard(){
     return board;
+  }
+
+  public void setPlayerColor(boolean isWhite) {
+    player.setColor(isWhite);
+  }
+
+  public boolean isPlayerCurrent(){
+    return board.isWhiteCurrent() == player.isWhite();
   }
 }
 

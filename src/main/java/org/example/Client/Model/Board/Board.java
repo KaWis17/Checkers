@@ -1,11 +1,23 @@
 package org.example.Client.Model.Board;
 
-import org.example.Client.Model.Tile;
-import org.example.Client.Model.TileState;
 import org.example.Vector2;
 
 public abstract class Board {
     protected Tile[][] tiles = new Tile[8][8];
+
+    boolean isWhiteCurrent = false;
+
+    public boolean isWhiteCurrent() {
+        return isWhiteCurrent;
+    }
+
+    public void negateCurrent(){
+        isWhiteCurrent=!isWhiteCurrent;
+    }
+
+    public void setWhiteCurrent(boolean whiteCurrent) {
+        isWhiteCurrent = whiteCurrent;
+    }
 
     public Tile getPicked() {
         Vector2 pickedPos = getPickedPos();
@@ -57,16 +69,6 @@ public abstract class Board {
         return getTile(chosenPos).getState() == TileState.EMPTY;
     }
 
-    //to do vector2
-
-    //te trzeba przemyslec
-    public boolean shortTaking(Vector2 picked, Vector2 chosen){
-        Tile middleTile = getMiddleTile(picked,chosen);
-        return picked.manhattanDistance(chosen) == 4 && picked.inDiagonal(chosen) &&
-                opponents(middleTile.getState(),getTile(picked).getState());
-
-    }
-
     public boolean opponents(TileState tile1, TileState tile2){
         if (tile1 == TileState.EMPTY || tile2 == TileState.EMPTY)
             return false;
@@ -75,8 +77,13 @@ public abstract class Board {
                 (tile2 == TileState.PON_1 || tile2 == TileState.QUEEN_1);
     }
 
+    public boolean isMine(int x, int y){
+        Tile tile = getTile(x,y);
+        return tile.getState() == TileState.EMPTY ||  ((tile.getState().ordinal() % 2 == 1) == isWhiteCurrent);
+    }
+
     public Tile getMiddleTile(Vector2 pos1, Vector2 pos2){
-        //zabezpieczyc
+        //TODO: make secure
         return getTile(new Vector2((pos1.getX()+ pos2.getX())/2, (pos1.getY()+ pos2.getY())/2));
     }
 

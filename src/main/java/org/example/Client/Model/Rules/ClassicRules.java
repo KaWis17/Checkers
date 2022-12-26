@@ -8,7 +8,7 @@ import org.example.Client.Model.Rules.FigureRules.FigureMoves.FigureMove;
 import org.example.Client.Model.Rules.FigureRules.FigureMoves.Pon.PonAttack;
 import org.example.Client.Model.Rules.FigureRules.FigureMoves.Pon.PonMove;
 import org.example.Client.Model.Rules.FigureRules.FigureMoves.Queens.LineMove;
-import org.example.Client.Model.TileState;
+import org.example.Client.Model.Board.TileState;
 import org.example.Vector2;
 
 public class ClassicRules implements Rules {
@@ -18,12 +18,12 @@ public class ClassicRules implements Rules {
 
     public ClassicRules() {
         List<FigureMove> pon1Moves = new ArrayList<>();
-        pon1Moves.add(new PonAttack(new Vector2[]{}));
+        pon1Moves.add(new PonAttack(new Vector2[]{new Vector2(2,2),new Vector2(2,-2),new Vector2(2,2),new Vector2(2,-2)}));
         pon1Moves.add(new PonMove(new Vector2[]{new Vector2(1,1),new Vector2(1,-1)}));
         pon1 = new Figure(pon1Moves);
 
         List<FigureMove> pon2Moves = new ArrayList<>();
-        pon2Moves.add(new PonAttack(new Vector2[]{}));
+        pon2Moves.add(new PonAttack(new Vector2[]{new Vector2(2,2),new Vector2(2,-2),new Vector2(2,2),new Vector2(2,-2)}));
         pon2Moves.add(new PonMove(new Vector2[]{new Vector2(-1,-1),new Vector2(-1,1)}));
         pon2 = new Figure(pon2Moves);
 
@@ -34,7 +34,7 @@ public class ClassicRules implements Rules {
 
     @Override
     public void pick(Vector2 chosen, Board board) {
-        if(board.getTiles()[chosen.getX()][chosen.getY()].getState() == TileState.EMPTY)
+        if(board.getTile(chosen).getState() == TileState.EMPTY)
             return;
         for(int i = 0; i < 8; i++){
             for(int j = 0; j < 8; j++){

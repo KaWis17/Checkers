@@ -1,7 +1,5 @@
 package org.example.Client.Controller;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import javax.swing.JTextArea;
@@ -31,6 +29,9 @@ public class SpecificController extends AbstractController {
     if(CommandMatching.matchesCommand(line,"othername")){
       executeOtherName(line);
     }
+    if(CommandMatching.matchesCommand(line,"localcolor")){
+      executeLocalColor(line);
+    }
     if(CommandMatching.matchesCommand(line,"print","localprint")){
       executePrint();
     }
@@ -51,6 +52,12 @@ public class SpecificController extends AbstractController {
     String name = line.replaceAll("(.*): /localname ", "");
     ((SpecificController)client.controller).setModelPlayer(name +": ");
     ((StatsPanel)view.download(1).download(1)).setPlayer1(name);
+  }
+
+  private void executeLocalColor(String line) {
+    String argument = line.replaceAll("(.*): /localcolor ", "");
+    boolean color = argument.toLowerCase().contains("white");
+    ((SpecificController)client.controller).setModelColor(color);
   }
 
   private void executeOtherName(String line) {
@@ -114,7 +121,7 @@ public class SpecificController extends AbstractController {
           write.setText("");
           if(CommandMatching.isCommand(text))
           processCommand(text);
-          client.send(text);
+          client.send(": "+text);
         }
       }
 
@@ -129,6 +136,10 @@ public class SpecificController extends AbstractController {
       for(int j=0; j<8; j++){
         Tile tile = ((Tile)view.download(1).download(2).download(i*8+j));
         tile.addAction(e -> {
+          //TODO: Make simpler
+          if(!((SpecificModel)model).isPlayerCurrent() ||
+                  !((SpecificModel)model).getBoard().isMine(tile.getPlace()/8,tile.getPlace()%8)) return;
+
           if(((SpecificModel)model).getBoard().getPicked() == null){
             client.send(": /pick "+ tile.getPlace()/8+" "+ tile.getPlace()%8);
           }
@@ -141,11 +152,11 @@ public class SpecificController extends AbstractController {
   }
 
   public void setModelPlayer(String name){
-    ((SpecificModel)model).setPlayer(name);
+    ((SpecificModel)model).setPlayerName(name);
   }
 
-  public String getModelPlayer(){
-    return ((SpecificModel)model).getPlayer();
+  public void setModelColor(boolean isWhite){
+    ((SpecificModel)model).setPlayerColor(isWhite);
   }
 }
 

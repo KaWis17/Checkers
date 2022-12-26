@@ -1,7 +1,7 @@
 package org.example.Client.Model.Rules.FigureRules.FigureMoves;
 import org.example.Client.Model.Board.Board;
-import org.example.Client.Model.Tile;
-import org.example.Client.Model.TileState;
+import org.example.Client.Model.Board.Tile;
+import org.example.Client.Model.Board.TileState;
 import org.example.Vector2;
 
 public abstract class FigureMove {
@@ -27,6 +27,7 @@ public abstract class FigureMove {
         board.getTile(chosenPos).setState(picked.getState());
         picked.setPicked(false);
         picked.setState(TileState.EMPTY);
+        board.negateCurrent();
     }
 
     protected boolean validDirection(Vector2 direction){

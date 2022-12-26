@@ -2,8 +2,8 @@ package org.example.Client.Model.Rules.FigureRules.FigureMoves.Pon;
 
 import org.example.Client.Model.Board.Board;
 import org.example.Client.Model.Rules.FigureRules.FigureMoves.FigureMove;
-import org.example.Client.Model.Tile;
-import org.example.Client.Model.TileState;
+import org.example.Client.Model.Board.Tile;
+import org.example.Client.Model.Board.TileState;
 import org.example.Vector2;
 
 public class PonAttack extends FigureMove {
@@ -20,14 +20,32 @@ public class PonAttack extends FigureMove {
                 board.foundEmpty(chosenPos);
     }
 
+    //TODO: REFACTOR
+    boolean hasMove(Board board){
+        for(int i=0;i<normalizedDirections.length;i++){
+            Vector2 candidate=normalizedDirections[i];
+            candidate.add(board.getPickedPos());
+            if( candidate.getX()>=0 && candidate.getY()>=0 &&
+                    candidate.getX()<=7 && candidate.getY()<=7 &&
+                    canMove(candidate,board)) return true;
+        }
+        return false;
+    }
+
     @Override
     public void move(Vector2 chosenPos, Board board) {
+        //ZABLOKOWAC JAKOS INNE RUCHY
         Tile picked = board.getPicked();
         Vector2 pickedPos = board.getPickedPos();
         board.getTile(chosenPos).setState(picked.getState());
+        board.getTile(chosenPos).setPicked(true);
         picked.setPicked(false);
         picked.setState(TileState.EMPTY);
         board.getMiddleTile(chosenPos,pickedPos).setState(TileState.EMPTY);
-        board.changePonsToQueens();
+        if(!hasMove(board)){
+            board.getPicked().setPicked(false);
+            board.negateCurrent();
+            board.changePonsToQueens();
+        }
     }
 }

@@ -2,8 +2,6 @@ package org.example.Client.Model.Rules.FigureRules.FigureMoves.Pon;
 
 import org.example.Client.Model.Board.Board;
 import org.example.Client.Model.Rules.FigureRules.FigureMoves.FigureMove;
-import org.example.Client.Model.Tile;
-import org.example.Client.Model.TileState;
 import org.example.Vector2;
 
 public class PonMove extends FigureMove {

@@ -1,4 +1,4 @@
-package org.example.Client.Model;
+package org.example.Client.Model.Board;
 
 public class Tile {
     private boolean isWhite;
