@@ -18,12 +18,12 @@ public class ClassicRules implements Rules {
 
     public ClassicRules() {
         List<FigureMove> pon1Moves = new ArrayList<>();
-        pon1Moves.add(new PonAttack(new Vector2[]{new Vector2(2,2),new Vector2(2,-2),new Vector2(2,2),new Vector2(2,-2)}));
+        pon1Moves.add(new PonAttack(new Vector2[]{new Vector2(2,2),new Vector2(2,-2),new Vector2(-2,-2),new Vector2(-2,2)}));
         pon1Moves.add(new PonMove(new Vector2[]{new Vector2(1,1),new Vector2(1,-1)}));
         pon1 = new Figure(pon1Moves);
 
         List<FigureMove> pon2Moves = new ArrayList<>();
-        pon2Moves.add(new PonAttack(new Vector2[]{new Vector2(2,2),new Vector2(2,-2),new Vector2(2,2),new Vector2(2,-2)}));
+        pon2Moves.add(new PonAttack(new Vector2[]{new Vector2(2,2),new Vector2(2,-2),new Vector2(-2,-2),new Vector2(-2,2)}));
         pon2Moves.add(new PonMove(new Vector2[]{new Vector2(-1,-1),new Vector2(-1,1)}));
         pon2 = new Figure(pon2Moves);
 

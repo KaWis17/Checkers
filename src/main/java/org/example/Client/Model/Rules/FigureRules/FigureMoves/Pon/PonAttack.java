@@ -22,9 +22,11 @@ public class PonAttack extends FigureMove {
 
     //TODO: REFACTOR
     boolean hasMove(Board board){
+        System.out.println("TUTAJ");
         for(int i=0;i<normalizedDirections.length;i++){
-            Vector2 candidate=normalizedDirections[i];
+            Vector2 candidate=new Vector2(normalizedDirections[i].getX(),normalizedDirections[i].getY());
             candidate.add(board.getPickedPos());
+            System.out.println(candidate.getX()+" "+candidate.getY());
             if( candidate.getX()>=0 && candidate.getY()>=0 &&
                     candidate.getX()<=7 && candidate.getY()<=7 &&
                     canMove(candidate,board)) return true;
