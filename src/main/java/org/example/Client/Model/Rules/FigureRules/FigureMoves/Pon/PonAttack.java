@@ -15,7 +15,7 @@ public class PonAttack extends FigureMove {
     public boolean canMove(Vector2 chosenPos, Board board) {
         Vector2 pickedPos = board.getPickedPos();
         Tile middleTile = board.getMiddleTile(pickedPos,chosenPos);
-        return pickedPos.manhattanDistance(chosenPos) == 4 && pickedPos.inDiagonal(chosenPos) &&
+        return  pickedPos.manhattanDistance(chosenPos) == 4 && pickedPos.inDiagonal(chosenPos) &&
                 board.opponents(middleTile.getState(),board.getPicked().getState()) &&
                 board.foundEmpty(chosenPos);
     }
@@ -34,7 +34,6 @@ public class PonAttack extends FigureMove {
 
     @Override
     public void move(Vector2 chosenPos, Board board) {
-        //ZABLOKOWAC JAKOS INNE RUCHY
         Tile picked = board.getPicked();
         Vector2 pickedPos = board.getPickedPos();
         board.getTile(chosenPos).setState(picked.getState());

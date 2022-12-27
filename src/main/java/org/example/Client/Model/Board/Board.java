@@ -56,11 +56,15 @@ public abstract class Board {
         Vector2 stepDimensions = step.normalized();
         Vector2 current = new Vector2(pickedPos.getX(), pickedPos.getY());
         current.add(stepDimensions);
+        System.out.println("start");
         while(current.getX()!=chosenPos.getX() || current.getY()!=chosenPos.getY())
         {
-            if(getTile(current.getX(), current.getY()).getState()!=TileState.EMPTY) return false;
+            System.out.println("krok "+current.getX()+" "+current.getY());
+            if(getTile(current.getX(), current.getY()).getState() != TileState.EMPTY)
+                return false;
             current.add(stepDimensions);
         }
+        System.out.println("koniec");
         return (current.getX()==chosenPos.getX() && current.getY()==chosenPos.getY()) ||
                 opponents(getTile(current).getState(),getPicked().getState());
     }

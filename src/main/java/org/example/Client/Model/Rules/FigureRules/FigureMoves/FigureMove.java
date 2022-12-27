@@ -2,10 +2,10 @@ package org.example.Client.Model.Rules.FigureRules.FigureMoves;
 import org.example.Client.Model.Board.Board;
 import org.example.Client.Model.Board.Tile;
 import org.example.Client.Model.Board.TileState;
+import org.example.Client.Model.Rules.FigureRules.Figure;
 import org.example.Vector2;
 
 public abstract class FigureMove {
-
     protected Vector2[] normalizedDirections;
 
     protected FigureMove(Vector2[] normalizedDirections) {
