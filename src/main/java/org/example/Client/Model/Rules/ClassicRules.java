@@ -41,6 +41,18 @@ public class ClassicRules implements Rules {
                 board.getTiles()[i][j].setPicked( (chosen.getX() == i && chosen.getY() == j) );
             }
         }
+        TileState picked = board.getPicked().getState();
+        switch (picked) {
+            case PON_1 -> {
+                pon1.setPossibleMoves(board);
+            }
+            case PON_2 -> {
+                pon2.setPossibleMoves(board);
+            }
+            case QUEEN_1,QUEEN_2 -> {
+                queen.setPossibleMoves(board);
+            }
+        }
     }
 
     @Override
@@ -54,7 +66,7 @@ public class ClassicRules implements Rules {
                 pon2.move(chosenPos,board);
             }
             case QUEEN_1,QUEEN_2 -> {
-                    queen.move(chosenPos,board);
+                queen.move(chosenPos,board);
             }
             case EMPTY -> {
                 board.getPicked().setPicked(false);

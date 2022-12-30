@@ -1,7 +1,6 @@
 package org.example.Client.Model;
 
 import org.example.Client.Model.Board.Board;
-import org.example.Client.Model.Board.nRowsBoard;
 import org.example.Client.Model.Rules.ClassicRules;
 import org.example.Client.Model.Rules.Rules;
 import org.example.Vector2;
@@ -12,21 +11,9 @@ public class SpecificModel extends AbstractModel {
   Player player;
 
   public SpecificModel() {
-    board = new nRowsBoard(3);
+    board = new Board(3);
     rules = new ClassicRules();
     player = new Player("Anon",false);
-  }
-
-  //TODO: move to board
-  public String printBoard() {
-    StringBuilder result= new StringBuilder();
-    for(int i = 0; i < 8; i++){
-      for(int j = 0; j < 8; j++){
-        result.append(board.getTiles()[i][j].getTileCode());
-      }
-      result.append("\n");
-    }
-    return result.toString();
   }
 
   public void pick(int x, int y) {

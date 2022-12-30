@@ -1,17 +1,15 @@
 package org.example.Client.Controller;
 
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
-import javax.swing.JTextArea;
 import org.example.Client.Client;
 import org.example.Client.Controller.Commands.AbstractCommand;
+import org.example.Client.Controller.Commands.CommandMatching;
 import org.example.Client.Model.SpecificModel;
 import org.example.Client.View.GameWindow.Board.Tile;
 import org.example.Client.View.GameWindow.Chat.ChatPanel;
-import org.example.Client.View.GameWindow.GameFrame;
-import org.example.Client.Controller.Commands.CommandMatching;
 
-import static java.lang.Integer.parseInt;
+import javax.swing.*;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 
 
 public class SpecificController extends AbstractController {
@@ -25,7 +23,7 @@ public class SpecificController extends AbstractController {
   public void processCommand(String line){
     AbstractCommand command = CommandMatching.findCommand(line);
     if(command != null) command.execute(line,client);
-    ((ChatPanel)((GameFrame)view).download(1).download(3)).addText(line);
+    ((ChatPanel) view.download(1).download(3)).addText(line);
   }
 
   public void initGame(){
@@ -61,19 +59,24 @@ public class SpecificController extends AbstractController {
       for(int j=0; j<8; j++){
         Tile tile = ((Tile)view.download(1).download(2).download(i*8+j));
         tile.addAction(e -> {
-          //TODO: Make simpler
-          if(!((SpecificModel)model).isPlayerCurrent()) return;
-
-          if(((SpecificModel)model).getBoard().getPicked() == null){
-            if (!((SpecificModel)model).getBoard().isMine(tile.getPlace()/8,tile.getPlace()%8)) return;
-            client.send(": /pick "+ tile.getPlace()/8+" "+ tile.getPlace()%8);
-          }
-          else{
-            client.send(": /put "+ tile.getPlace()/8+" "+ tile.getPlace()%8);
+          if(((SpecificModel)model).isPlayerCurrent()){
+            if (pickedPonExists() && isMine(tile)) {
+              client.send(": /pick " + tile.getPlace() / 8 + " " + tile.getPlace() % 8);
+            } else if (!pickedPonExists()){
+              client.send(": /put " + tile.getPlace() / 8 + " " + tile.getPlace() % 8);
+            }
           }
         });
       }
     }
+  }
+
+  private boolean isMine(Tile tile) {
+    return ((SpecificModel) model).getBoard().isMine(tile.getPlace() / 8, tile.getPlace() % 8);
+  }
+
+  private boolean pickedPonExists() {
+    return ((SpecificModel) model).getBoard().getPicked() == null;
   }
 
   public void setModelPlayer(String name){

@@ -22,4 +22,10 @@ public class Figure{
         }
         board.getPicked().setPicked(false);
     }
+
+    public void setPossibleMoves(Board board){
+        for (FigureMove move : moves){
+            move.setPossibleMoves(board);
+        }
+    }
 }

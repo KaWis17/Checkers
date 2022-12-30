@@ -7,7 +7,7 @@ import org.example.Client.View.GameWindow.Board.Tile;
 public class Notify extends AbstractCommand {
     @Override
     public void execute(String line, Client client) {
-        String board = (((SpecificModel)client.model).printBoard());
+        String board = (((SpecificModel)client.model).getBoard().printBoard());
         for(int i=0; i<8; i++){
             for(int j=0; j<8; j++){
                 Tile tile = ((Tile)client.view.download(1).download(2).download(i*8+j));

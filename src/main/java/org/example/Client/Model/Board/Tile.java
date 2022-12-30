@@ -3,12 +3,18 @@ package org.example.Client.Model.Board;
 public class Tile {
     private boolean isWhite;
     private boolean isPicked;
+    private boolean isPossible;
     private TileState state;
 
     public Tile(boolean isWhite, TileState state){
         this.isWhite=isWhite;
         this.state=state;
         isPicked=false;
+        isPossible=false;
+    }
+
+    public void setPossible(boolean isPossible){
+        this.isPossible=isPossible;
     }
 
     public void setWhite(boolean white) {
@@ -22,6 +28,10 @@ public class Tile {
     public boolean isWhite() {
         return isWhite;
     }
+
+    public boolean isPossible() {
+    return isPossible;
+}
 
     public TileState getState() {
         return state;
@@ -38,6 +48,6 @@ public class Tile {
     public String getTileCode() {
         char colorFlag = isWhite ? 'w' : 'b';
         int stateFlag=state.ordinal();
-        return isPicked ? "{"+colorFlag+stateFlag+"}" : "["+colorFlag+stateFlag+"]";
+        return isPicked ? "{"+colorFlag+stateFlag+"}": isPossible ? "<"+colorFlag+stateFlag+">" : "["+colorFlag+stateFlag+"]";
     }
 }
