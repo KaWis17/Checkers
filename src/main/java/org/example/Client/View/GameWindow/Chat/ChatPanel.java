@@ -5,7 +5,7 @@ import java.awt.event.ActionListener;
 import javax.swing.JPanel;
 
 import org.example.Client.View.View;
-import org.example.CommandMatching;
+import org.example.Client.Controller.Commands.CommandMatching;
 
 public class ChatPanel extends JPanel implements View {
   private ChatArea area;

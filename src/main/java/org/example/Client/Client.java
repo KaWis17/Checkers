@@ -16,9 +16,9 @@ public class Client {
   private static PrintWriter out;
   private static BufferedReader bufferRead;
 
-  private View view;
+  public View view;
 
-  private AbstractModel model;
+  public AbstractModel model;
 
   public AbstractController controller;
 

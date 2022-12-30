@@ -1,6 +1,6 @@
 package org.example.Server;
 
-import org.example.CommandMatching;
+import org.example.Client.Controller.Commands.CommandMatching;
 
 import java.io.*;
 import java.net.Socket;
