@@ -5,7 +5,7 @@ import org.example.Vector2;
 public class Board {
     protected Tile[][] tiles = new Tile[8][8];
 
-    boolean isWhiteCurrent = false;
+    boolean isWhiteCurrent = true;
 
     public boolean isWhiteCurrent() {
         return isWhiteCurrent;

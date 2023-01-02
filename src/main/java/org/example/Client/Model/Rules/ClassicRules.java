@@ -34,6 +34,7 @@ public class ClassicRules implements Rules {
 
     @Override
     public void pick(Vector2 chosen, Board board) {
+        board.setAllTilesNotPossible();
         if(board.getTile(chosen).getState() == TileState.EMPTY)
             return;
         for(int i = 0; i < 8; i++){

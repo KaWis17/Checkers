@@ -15,9 +15,10 @@ public class Notify extends AbstractCommand {
                 char color = board.charAt(location +1);
                 int state = Character.getNumericValue(board.charAt(location +2));
                 boolean picked = board.charAt(location)=='{';
-
+                boolean possible = board.charAt(location)=='<';
                 tile.setColor(color);
                 if(picked) tile.setColor('y');
+                else if(possible) tile.setColor('g');
                 tile.setState(state);
 
             }

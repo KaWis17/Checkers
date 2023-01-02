@@ -12,15 +12,15 @@ public class Tile extends JButton implements View {
     this.setForeground(Color.red);
     setFocusable(false);
     this.place = i;
-
-
-
   }
 
   public void setColor(char color){
-    if(color == 'w') this.setBackground(Color.WHITE);
-    else if(color == 'y') this.setBackground(Color.yellow);
-    else this.setBackground(Color.BLACK);
+    switch (color){
+      case 'w' -> this.setBackground(Color.WHITE);
+      case 'y' -> this.setBackground(Color.YELLOW);
+      case 'g' -> this.setBackground(Color.GREEN);
+      default -> this.setBackground(Color.BLACK);
+    }
   }
 
   public void setState(int state){

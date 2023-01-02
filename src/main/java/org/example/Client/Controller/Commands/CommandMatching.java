@@ -41,6 +41,9 @@ public class CommandMatching {
             case "put" -> {
                 return new Put();
             }
+            case "localstart" -> {
+                return new LocalStart();
+            }
         }
         return null;
     }

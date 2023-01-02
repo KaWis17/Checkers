@@ -21,6 +21,7 @@ public class Figure{
             }
         }
         board.getPicked().setPicked(false);
+        board.setAllTilesNotPossible();
     }
 
     public void setPossibleMoves(Board board){
