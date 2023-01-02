@@ -6,11 +6,24 @@ import org.example.Client.Model.Board.Tile;
 import org.example.Client.Model.Board.TileState;
 import org.example.Vector2;
 
+/**
+ * class that represents pon attack
+ */
 public class PonAttack extends FigureMove {
-    public PonAttack(Vector2[] normalizedDirections) {
-        super(normalizedDirections);
+    /**
+     * constructor
+     * @param directions directions
+     */
+    public PonAttack(Vector2[] directions) {
+        super(directions);
     }
 
+    /**
+     * checks if pon can attack
+     * @param chosenPos chosen position
+     * @param board board
+     * @return answer
+     */
     @Override
     public boolean canMove(Vector2 chosenPos, Board board) {
         Vector2 pickedPos = board.getPickedPos();
@@ -21,6 +34,11 @@ public class PonAttack extends FigureMove {
                 && board.opponents(middleTile.getState(),board.getPicked().getState());
     }
 
+    /**
+     * executes pons movement
+     * @param chosenPos chosen position
+     * @param board board
+     */
     @Override
     public void move(Vector2 chosenPos, Board board) {
         Tile picked = board.getPicked();
