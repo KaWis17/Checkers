@@ -6,33 +6,52 @@ import org.example.Client.Controller.Commands.CommandMatching;
 import org.example.Client.Model.SpecificModel;
 import org.example.Client.View.GameWindow.Board.Tile;
 import org.example.Client.View.GameWindow.Chat.ChatPanel;
+import org.example.Vector2;
 
 import javax.swing.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
-
+/**
+ * Specific controller
+ */
 public class SpecificController extends AbstractController {
-
+  /**
+   * client that is connected to controller
+   */
   Client client;
 
+  /**
+   * Constructor
+   * @param client client
+   */
   public SpecificController(Client client){
       this.client=client;
   }
 
+  /**
+   * function that matches given line with certain command and then executes it
+   * @param line command to process
+   */
   public void processCommand(String line){
     AbstractCommand command = CommandMatching.findCommand(line);
     if(command != null) command.execute(line,client);
     ((ChatPanel) view.download(1).download(3)).addText(line);
   }
 
+  /**
+   * function that initializes game
+   */
   public void initGame(){
     client.initConnection(4444);
   }
 
+  /**
+   * addition of key listener to chat
+   */
   public void chat(){
     JTextArea write = ((JTextArea)(view.download(1).download(3)).download(2));
-
+    //TODO: create documentation
     write.addKeyListener(new KeyListener() {
       @Override
       public void keyTyped(KeyEvent e) {}
@@ -43,7 +62,7 @@ public class SpecificController extends AbstractController {
           String text = write.getText();
           write.setText("");
           if(CommandMatching.isCommand(text))
-          processCommand(text);
+            processCommand(text);
           client.send(": "+text);
         }
       }
@@ -53,6 +72,9 @@ public class SpecificController extends AbstractController {
     });
   }
 
+  /**
+   * adding listeners to tile
+   */
   public void tileListener(){
     //TODO: Interpelacja do dr. Macyny
     for(int i=0; i<8; i++){
@@ -71,18 +93,35 @@ public class SpecificController extends AbstractController {
     }
   }
 
+  /**
+   * return if tile is mine
+   * @param tile tile
+   * @return answer
+   */
   private boolean isMine(Tile tile) {
-    return ((SpecificModel) model).getBoard().isMine(tile.getPlace() / 8, tile.getPlace() % 8);
+    return ((SpecificModel) model).getBoard().isMine(new Vector2(tile.getPlace() / 8, tile.getPlace() % 8));
   }
 
+  /**
+   * returns if any pon was picked
+   * @return answer
+   */
   private boolean pickedPonExists() {
     return ((SpecificModel) model).getBoard().getPicked() == null;
   }
 
+  /**
+   * sets player name
+   * @param name name
+   */
   public void setModelPlayer(String name){
     ((SpecificModel)model).setPlayerName(name);
   }
 
+  /**
+   * sets model color
+   * @param isWhite is white
+   */
   public void setModelColor(boolean isWhite){
     ((SpecificModel)model).setPlayerColor(isWhite);
   }

@@ -149,12 +149,11 @@ public class Board {
     //TODO: refactor to the vector
     /**
      * returns true if on cords (x,y) lays my pon
-     * @param x x
-     * @param y y
-     * @return
+     * @param vector vector
+     * @return answer
      */
-    public boolean isMine(int x, int y){
-        Tile tile = getTile(x,y);
+    public boolean isMine(Vector2 vector){
+        Tile tile = getTile(vector.getX(), vector.getY());
         return tile.getState() == TileState.EMPTY ||  ((tile.getState().ordinal() % 2 == 1) == isWhiteCurrent);
     }
 
@@ -162,7 +161,7 @@ public class Board {
      * returns tile between two given tiles
      * @param pos1 pos1
      * @param pos2 pos2
-     * @return
+     * @return answer
      */
     public Tile getMiddleTile(Vector2 pos1, Vector2 pos2){
         return getTile(new Vector2((pos1.getX()+ pos2.getX())/2, (pos1.getY()+ pos2.getY())/2));
