@@ -1,18 +1,40 @@
 package org.example.Client.View;
 
 import java.awt.event.ActionListener;
-import org.example.Client.Model.AbstractModel;
 
+/**
+ *
+ */
 public interface View {
   //AbstractModel model = null;
 
-  public void display();
+  /**
+   *
+   */
+  void display();
 
-  public void addComponent(View view);
+  /**
+   *
+   * @param view
+   */
+  void addComponent(View view);
 
-  public void addAction(ActionListener listener);
+  /**
+   *
+   * @param listener
+   */
+  void addAction(ActionListener listener);
 
-  public void remove(View view);
+  /**
+   *
+   * @param view
+   */
+  void remove(View view);
 
-  public View download(int i);
+  /**
+   *
+   * @param i
+   * @return
+   */
+  View download(int i);
 }

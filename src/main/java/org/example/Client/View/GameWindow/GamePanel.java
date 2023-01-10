@@ -10,11 +10,18 @@ import org.example.Client.View.GameWindow.Chat.ChatPanel;
 import org.example.Client.View.GameWindow.Stats.StatsPanel;
 import org.example.Client.View.View;
 
+/**
+ *
+ */
 public class GamePanel extends JPanel implements View {
 
   private StatsPanel statsPanel;
   private BoardPanel boardPanel;
   private ChatPanel chatPanel;
+
+  /**
+   *
+   */
   GamePanel(){
     setBackground(Color.BLUE);
     setLayout(new BorderLayout());
@@ -23,26 +30,46 @@ public class GamePanel extends JPanel implements View {
     add(chatPanel = new ChatPanel(), BorderLayout.EAST);
   }
 
+  /**
+   *
+   */
   @Override
   public void display() {
 
   }
 
+  /**
+   *
+   * @param view
+   */
   @Override
   public void addComponent(View view) {
     this.add((Component) view);
   }
 
+  /**
+   *
+   * @param listener
+   */
   @Override
   public void addAction(ActionListener listener) {
 
   }
 
+  /**
+   *
+   * @param view
+   */
   @Override
   public void remove(View view) {
 
   }
 
+  /**
+   *
+   * @param i
+   * @return
+   */
   @Override
   public View download(int i) {
     if(i==1) return statsPanel;

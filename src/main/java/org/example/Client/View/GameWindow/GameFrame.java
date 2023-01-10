@@ -5,8 +5,15 @@ import java.awt.event.ActionListener;
 import javax.swing.JFrame;
 import org.example.Client.View.View;
 
+/**
+ *
+ */
 public class GameFrame extends JFrame implements View {
-  private GamePanel panel;
+  private final GamePanel panel;
+
+  /**
+   *
+   */
   public GameFrame(){
     setTitle("Warcaby");
     setSize(500, 500);
@@ -16,26 +23,46 @@ public class GameFrame extends JFrame implements View {
     display();
   }
 
+  /**
+   *
+   */
   @Override
   public void display() {
     setVisible(true);
   }
 
+  /**
+   *
+   * @param view
+   */
   @Override
   public void addComponent(View view) {
     this.add((Component) view);
   }
 
+  /**
+   *
+   * @param listener
+   */
   @Override
   public void addAction(ActionListener listener) {
 
   }
 
+  /**
+   *
+   * @param view
+   */
   @Override
   public void remove(View view) {
 
   }
 
+  /**
+   *
+   * @param i
+   * @return
+   */
   @Override
   public View download(int i) {
     return panel;
