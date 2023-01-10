@@ -90,4 +90,8 @@ public class Tile {
         int stateFlag=state.ordinal();
         return isPicked ? "{"+colorFlag+stateFlag+"}": isPossible ? "<"+colorFlag+stateFlag+">" : "["+colorFlag+stateFlag+"]";
     }
+
+    public boolean isPossible() {
+        return isPossible;
+    }
 }
