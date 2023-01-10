@@ -16,9 +16,9 @@ public class GameFrame extends JFrame implements View {
    */
   public GameFrame(){
     setTitle("Warcaby");
-    setSize(500, 500);
+    setSize(1000, 750);
+    setResizable(false);
     setDefaultCloseOperation(EXIT_ON_CLOSE);
-    setExtendedState(JFrame.MAXIMIZED_BOTH);
     addComponent(panel = new GamePanel());
     display();
   }

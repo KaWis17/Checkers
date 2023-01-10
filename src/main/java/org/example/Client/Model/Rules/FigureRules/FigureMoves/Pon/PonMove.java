@@ -36,6 +36,6 @@ public class PonMove extends FigureMove {
     @Override
     public void move(Vector2 chosenPos, Board board) {
         super.move(chosenPos,board);
-        board.changePonsToQueens();
+        board.changePonToQueen();
     }
 }

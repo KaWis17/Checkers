@@ -53,7 +53,7 @@ public class PonAttack extends FigureMove {
         if(!hasMove(board)){
             board.getPicked().setPicked(false);
             board.negateCurrent();
-            board.changePonsToQueens();
+            board.changePonToQueen();
             board.setAllTilesNotPossible();
         }
     }

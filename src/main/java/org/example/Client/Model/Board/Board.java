@@ -16,26 +16,25 @@ public class Board {
     boolean isWhiteCurrent = true;
 
     /**
-     * getter for current player color
-     * @return is white current?
-     */
-    public boolean isWhiteCurrent() {
-        return isWhiteCurrent;
-    }
-
-    /**
-     * negates current player color
-     */
-    public void negateCurrent(){
-        isWhiteCurrent=!isWhiteCurrent;
-    }
-
-    /**
      * Board constructor
      * @param numberOfRows number of rows of pons at beginning
      */
     public Board(int numberOfRows) {
         setInit(numberOfRows);
+    }
+
+    /**
+     * inits the board for game
+     * @param numberOfRows number of rows
+     */
+    public void setInit(int numberOfRows) {
+        for(int i = 0; i < 8; i++){
+            for(int j = 0; j < 8; j++){
+                tiles[i][j] = new Tile((i+j)%2==0, TileState.EMPTY);
+                if(i<numberOfRows && !tiles[i][j].isWhite()) tiles[i][j].setState(TileState.PON_1);
+                if(i>7-numberOfRows && !tiles[i][j].isWhite()) tiles[i][j].setState(TileState.PON_2);
+            }
+        }
     }
 
     /**
@@ -179,7 +178,7 @@ public class Board {
     /**
      * changes pon to queen as it goes to the end of board
      */
-    public void changePonsToQueens() {
+    public void changePonToQueen() {
         for(int j=0;j<8;j++){
             if (getTile(7,j).getState() == TileState.PON_1)
                 getTile(7,j).setState(TileState.QUEEN_1);
@@ -215,16 +214,17 @@ public class Board {
     }
 
     /**
-     * inits the board for game
-     * @param numberOfRows number of rows
+     * getter for current player color
+     * @return is white current?
      */
-    public void setInit(int numberOfRows) {
-        for(int i = 0; i < 8; i++){
-            for(int j = 0; j < 8; j++){
-                tiles[i][j] = new Tile((i+j)%2==0, TileState.EMPTY);
-                if(i<numberOfRows && !tiles[i][j].isWhite()) tiles[i][j].setState(TileState.PON_1);
-                if(i>7-numberOfRows && !tiles[i][j].isWhite()) tiles[i][j].setState(TileState.PON_2);
-            }
-        }
+    public boolean isWhiteCurrent() {
+        return isWhiteCurrent;
+    }
+
+    /**
+     * negates current player color
+     */
+    public void negateCurrent(){
+        isWhiteCurrent=!isWhiteCurrent;
     }
 }
