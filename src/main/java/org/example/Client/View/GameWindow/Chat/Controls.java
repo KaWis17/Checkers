@@ -2,6 +2,7 @@ package org.example.Client.View.GameWindow.Chat;
 
 import java.awt.*;
 import java.awt.event.ActionListener;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 import org.example.Client.View.View;
@@ -10,19 +11,19 @@ import org.example.Client.Controller.Commands.CommandMatching;
 /**
  *
  */
-public class ChatPanel extends JPanel implements View {
-  private final ChatArea area;
+public class Controls extends JPanel implements View {
+  private final StartButton button;
   private final ChatWrite write;
 
   /**
    *
    */
-  public ChatPanel(){
+  public Controls(){
     setBackground(Color.green);
     setLayout(new GridLayout(2,1));
 
-    area = new ChatArea();
-    add(area);
+    button = new StartButton();
+    add(button);
 
     write = new ChatWrite();
     add(write);
@@ -33,10 +34,13 @@ public class ChatPanel extends JPanel implements View {
    *
    * @param text
    */
+  /* obsolete
   public void addText(String text){
     if(!isCommand(text))
-    area.append(text +"\n");
+    button.append(text +"\n");
   }
+   */
+
 
   /**
    *
@@ -89,7 +93,7 @@ public class ChatPanel extends JPanel implements View {
    */
   @Override
   public View download(int i) {
-    if(i==1) return area;
+    if(i==1) return button;
     if(i==2) return write;
     return null;
   }

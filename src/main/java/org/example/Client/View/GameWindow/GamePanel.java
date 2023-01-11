@@ -6,7 +6,7 @@ import java.awt.Component;
 import java.awt.event.ActionListener;
 import javax.swing.JPanel;
 import org.example.Client.View.GameWindow.Board.BoardPanel;
-import org.example.Client.View.GameWindow.Chat.ChatPanel;
+import org.example.Client.View.GameWindow.Chat.Controls;
 import org.example.Client.View.GameWindow.Stats.StatsPanel;
 import org.example.Client.View.View;
 
@@ -17,7 +17,7 @@ public class GamePanel extends JPanel implements View {
 
   private StatsPanel statsPanel;
   private BoardPanel boardPanel;
-  private ChatPanel chatPanel;
+  private Controls chatPanel;
 
   /**
    *
@@ -27,7 +27,7 @@ public class GamePanel extends JPanel implements View {
     setLayout(new BorderLayout());
     add(statsPanel = new StatsPanel(), BorderLayout.WEST);
     add(boardPanel = new BoardPanel(), BorderLayout.CENTER);
-    add(chatPanel = new ChatPanel(), BorderLayout.EAST);
+    add(chatPanel = new Controls(), BorderLayout.EAST);
   }
 
   /**

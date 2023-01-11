@@ -4,7 +4,6 @@ import java.io.*;
 import java.net.Socket;
 
 import org.example.Client.Controller.AbstractController;
-import org.example.Client.Controller.Commands.CommandMatching;
 import org.example.Client.Controller.SpecificController;
 import org.example.Client.Model.AbstractModel;
 import org.example.Client.Model.SpecificModel;
@@ -32,7 +31,7 @@ public class Client {
     controller.setView(view);
     model.setView(view);
 
-    ((SpecificController)controller).chat();
+    ((SpecificController)controller).controls();
     ((SpecificController)controller).tileListener();
     ((SpecificController)controller).initGame();
   }

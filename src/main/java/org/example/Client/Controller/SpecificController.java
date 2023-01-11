@@ -5,7 +5,7 @@ import org.example.Client.Controller.Commands.AbstractCommand;
 import org.example.Client.Controller.Commands.CommandMatching;
 import org.example.Client.Model.SpecificModel;
 import org.example.Client.View.GameWindow.Board.Tile;
-import org.example.Client.View.GameWindow.Chat.ChatPanel;
+import org.example.Client.View.GameWindow.Chat.StartButton;
 import org.example.Vector2;
 
 import javax.swing.*;
@@ -36,7 +36,6 @@ public class SpecificController extends AbstractController {
   public void processCommand(String line){
     AbstractCommand command = CommandMatching.findCommand(line);
     if(command != null) command.execute(line,client);
-    ((ChatPanel) view.download(1).download(3)).addText(line);
   }
 
   /**
@@ -49,7 +48,36 @@ public class SpecificController extends AbstractController {
   /**
    * addition of key listener to chat
    */
-  public void chat(){
+  public void controls(){
+
+    StartButton button = ((StartButton)view.download(1).download(3).download(1));
+    button.addAction(e -> {
+      String[] gameType = {"Classic", "No back attack", "Tower"};
+      String[] nrOfRows = {"2 rows", "3 rows"};
+
+      String type = (String) JOptionPane.showInputDialog(null, "Choose game type: ", "Choose game type: ", JOptionPane.QUESTION_MESSAGE, null, gameType, gameType[0]);
+      String rows = (String) JOptionPane.showInputDialog(null, "Choose number of rows:  ", "Choose number of rows: ", JOptionPane.QUESTION_MESSAGE, null, nrOfRows, nrOfRows[0]);
+
+      if(rows.equals("2 rows")){
+        switch (type) {
+          case "Classic" -> client.send(": /localstart 2 0");
+          case "No back attack" -> client.send(": /localstart 2 1");
+          case "Tower" -> client.send(": /localstart 2 2");
+        }
+      }
+      else{
+        switch (type) {
+          case "Classic" -> client.send(": /localstart 3 0");
+          case "No back attack" -> client.send(": /localstart 3 1");
+          case "Tower" -> client.send(": /localstart 3 2");
+        }
+      }
+
+      button.setText("reset game");
+    });
+
+
+
     JTextArea write = ((JTextArea)(view.download(1).download(3)).download(2));
     //TODO: create documentation
     write.addKeyListener(new KeyListener() {
@@ -76,7 +104,6 @@ public class SpecificController extends AbstractController {
    * adding listeners to tile
    */
   public void tileListener(){
-    //TODO: Interpelacja do dr. Macyny
     for(int i=0; i<8; i++){
       for(int j=0; j<8; j++){
         Tile tile = ((Tile)view.download(1).download(2).download(i*8+j));

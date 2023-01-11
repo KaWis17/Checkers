@@ -1,20 +1,18 @@
 package org.example.Client.View.GameWindow.Chat;
 
-import java.awt.Dimension;
 import java.awt.event.ActionListener;
-import javax.swing.JTextArea;
+import javax.swing.JButton;
 import org.example.Client.View.View;
 
 /**
  *
  */
-public class ChatArea extends JTextArea implements View {
+public class StartButton extends JButton implements View {
   /**
    *
    */
-  public ChatArea(){
-    setPreferredSize(new Dimension(200,500));
-    setEnabled(false);
+  public StartButton(){
+    setText("StartGame");
   }
 
   /**
@@ -34,13 +32,9 @@ public class ChatArea extends JTextArea implements View {
 
   }
 
-  /**
-   *
-   * @param listener
-   */
   @Override
   public void addAction(ActionListener listener) {
-
+    addActionListener(listener);
   }
 
   /**
