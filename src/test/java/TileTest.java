@@ -9,20 +9,27 @@ class TileTest {
   void setPossible(){
     Tile tile = new Tile(false, TileState.PON_1);
     tile.setPossible(true);
-    assertEquals(true, tile.isPossible());
+    assertTrue(tile.isPossible());
   }
 
   @Test
-  void setState(){
+  void setState1(){
     Tile tile = new Tile(false, TileState.PON_1);
     tile.setState(TileState.QUEEN_2);
     assertEquals(TileState.QUEEN_2, tile.getState());
   }
 
   @Test
+  void setState2(){
+    Tile tile = new Tile(false, TileState.PON_1);
+    tile.setState(TileState.EMPTY);
+    assertEquals(TileState.EMPTY, tile.getState());
+  }
+
+  @Test
   void setPicked(){
     Tile tile = new Tile(false, TileState.PON_1);
     tile.setPicked(true);
-    assertEquals(true, tile.isPicked());
+    assertTrue(tile.isPicked());
   }
 }
