@@ -152,5 +152,10 @@ public class SpecificController extends AbstractController {
   public void setModelColor(boolean isWhite){
     ((SpecificModel)model).setPlayerColor(isWhite);
   }
+
+  public void finish(){
+    StartButton button = ((StartButton)view.download(1).download(3).download(1));
+    button.setText("Play again!");
+  }
 }
 

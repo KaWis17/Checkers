@@ -227,4 +227,22 @@ public class Board {
     public void negateCurrent(){
         isWhiteCurrent=!isWhiteCurrent;
     }
+
+    /**
+     *
+     * @return -1 when white lost, 1 when black, 0 when nobody
+     */
+    public int getWinner()
+    {
+        boolean blackLost=true;
+        boolean whiteLost=true;
+        for(int i=0;i<8;i++)
+        {
+            for(int j=0;j<8;j++) {
+                if(tiles[i][j].getState().ordinal()%2==0 && tiles[i][j].getState().ordinal()!=0) blackLost=false;
+                if(tiles[i][j].getState().ordinal()%2==1) whiteLost=false;
+            }
+        }
+        return whiteLost? -1 : (blackLost ? 1 : 0);
+    }
 }

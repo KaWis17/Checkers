@@ -12,6 +12,12 @@ public class Put extends AbstractCommand {
         int x = parseInt(String.valueOf(line.charAt(0)));
         int y = parseInt(String.valueOf(line.charAt(2)));
         ((SpecificModel)client.model).put(x,y);
-        client.send(": /localnotify");
+        int winner = ((SpecificModel) client.model).getBoard().getWinner();
+        if(winner == 1 || winner == -1) {
+            client.send(": /endgame");
+        }
+        else{
+            client.send(": /localnotify");
+        }
     }
 }

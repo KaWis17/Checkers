@@ -70,6 +70,9 @@ public class CommandMatching {
             case "otherstart" -> {
                 return new OtherStart();
             }
+            case "endgame" -> {
+                return new EndGame();
+            }
         }
         return null;
     }
