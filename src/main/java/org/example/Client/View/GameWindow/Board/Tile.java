@@ -1,7 +1,9 @@
 package org.example.Client.View.GameWindow.Board;
 
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.event.ActionListener;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import org.example.Client.View.View;
 
@@ -20,6 +22,7 @@ public class Tile extends JButton implements View {
     this.setForeground(Color.red);
     setFocusable(false);
     this.place = i;
+    this.setFont(new Font("SansSerif", Font.PLAIN, 50));
   }
 
   /**
@@ -28,10 +31,10 @@ public class Tile extends JButton implements View {
    */
   public void setColor(char color){
     switch (color){
-      case 'w' -> this.setBackground(Color.WHITE);
+      case 'w' -> this.setBackground(new Color(225, 198, 153));
       case 'y' -> this.setBackground(Color.YELLOW);
       case 'g' -> this.setBackground(Color.GREEN);
-      default -> this.setBackground(Color.BLACK);
+      default -> this.setBackground(new Color(111, 78, 55));
     }
   }
 
@@ -42,10 +45,22 @@ public class Tile extends JButton implements View {
   public void setState(int state){
     switch (state){
       case 0 -> this.setText("");
-      case 1 -> this.setText("PON1");
-      case 2 -> this.setText("PON2");
-      case 3 -> this.setText("QUEEN1");
-      case 4 -> this.setText("QUEEN2");
+      case 1 -> {
+        this.setText("\u2B24");
+        this.setForeground(Color.BLACK);
+      }
+      case 2 -> {
+        this.setText("\u2B24");
+        this.setForeground(Color.WHITE);
+      }
+      case 3 -> {
+        this.setText("\u2605");
+        this.setForeground(Color.BLACK);
+      }
+      case 4 -> {
+        this.setText("\u2605");
+        this.setForeground(Color.WHITE);
+      }
     }
   }
 
