@@ -4,8 +4,6 @@ import org.example.Client.Model.Board.Board;
 import org.example.Client.Model.Board.TileState;
 import org.example.Vector2;
 
-import static java.lang.Math.abs;
-
 public class BotPonSmart extends BotMove{
 
 @Override

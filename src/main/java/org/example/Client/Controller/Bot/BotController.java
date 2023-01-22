@@ -10,11 +10,6 @@ import org.example.Client.Model.SpecificModel;
 import org.example.Vector2;
 
 public class BotController extends SpecificController {
-/**
- * Constructor
- *
- * @param client client
- */
 
     BotMove[] moves = {new BotPon(4), new BotQueen(false),new BotPonSmart(),new BotQueen(true),new BotPon(2)};
 
