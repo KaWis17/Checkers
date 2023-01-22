@@ -1,17 +1,15 @@
 package org.example.Client.Controller.Bot;
 
 import org.example.Client.Client;
-import org.example.Client.Controller.Bot.BotMoves.BotMove;
-import org.example.Client.Controller.Bot.BotMoves.BotPon;
-import org.example.Client.Controller.Bot.BotMoves.BotPonSmart;
-import org.example.Client.Controller.Bot.BotMoves.BotQueen;
+import org.example.Client.Controller.Bot.BotMoves.*;
 import org.example.Client.Controller.SpecificController;
 import org.example.Client.Model.SpecificModel;
 import org.example.Vector2;
 
 public class BotController extends SpecificController {
 
-    BotMove[] moves = {new BotPon(4), new BotQueen(false),new BotPonSmart(),new BotQueen(true),new BotPon(2)};
+    BotMove[] moves = {new BotPon(4), new BotQueen(false), new BotPonQueen(), new BotPonCorner(),
+                        new BotPonSmart(),new BotQueen(true),new BotPon(2)};
 
     public BotController(Client client) {
         super(client);
@@ -47,7 +45,7 @@ public class BotController extends SpecificController {
                 if(((SpecificModel)(botController.model)).initiated && ((SpecificModel)botController.model).isPlayerCurrent()){
                     current = botController.pickToCheckMove(current);
                     try {
-                        sleep(10);
+                        sleep(2);
                     } catch (InterruptedException e) {
                         throw new RuntimeException(e);
                     }
@@ -68,7 +66,7 @@ public class BotController extends SpecificController {
 
                 }
                 try {
-                    sleep(10);
+                    sleep(4);
                 } catch (InterruptedException e) {
                     throw new RuntimeException(e);
                 }

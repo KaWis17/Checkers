@@ -16,11 +16,6 @@ public Vector2 getWhereToPut(Board board) {
                 && board.foundEmpty(new Vector2((board.getPickedPos().getX()+i)/2,(board.getPickedPos().getY()+j)/2))
                 && board.getTile(new Vector2((board.getPickedPos().getX()+i)/2,(board.getPickedPos().getY()+j)/2)).isPossible())
                     return new Vector2((board.getPickedPos().getX()+i)/2,(board.getPickedPos().getY()+j)/2);
-            else if ((board.getPicked().getState() == TileState.PON_1 || board.getPicked().getState() == TileState.PON_2)
-                && (board.getPickedPos().manhattanDistance(new Vector2(i,j))==2 && (i==0||j==0||i==7||j==7) &&
-                board.getTile(i,j).isPossible())) {
-                return new Vector2(i,j);
-            }
         }
     }
     return null;
