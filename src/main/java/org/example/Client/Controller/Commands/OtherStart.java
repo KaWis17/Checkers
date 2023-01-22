@@ -23,5 +23,6 @@ public class OtherStart extends AbstractCommand{
             default -> ((SpecificModel)client.model).getRules().initRules(new NormalFigureRuleSet());
         }
         ((SpecificModel)client.model).getBoard().setInit(numberOfRows);
+        ((SpecificModel)client.model).initiated=true;
     }
 }

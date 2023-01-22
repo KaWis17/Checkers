@@ -22,6 +22,11 @@ public class SpecificModel extends AbstractModel {
   Player player;
 
   /**
+   * game initiated
+   */
+  public boolean initiated;
+
+  /**
    * Specific model constructor
    */
   public SpecificModel() {

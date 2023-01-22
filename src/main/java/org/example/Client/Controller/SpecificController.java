@@ -19,7 +19,7 @@ public class SpecificController extends AbstractController {
   /**
    * client that is connected to controller
    */
-  Client client;
+  protected Client client;
 
   /**
    * Constructor
@@ -109,9 +109,9 @@ public class SpecificController extends AbstractController {
         Tile tile = ((Tile)view.download(1).download(2).download(i*8+j));
         tile.addAction(e -> {
           if(((SpecificModel)model).isPlayerCurrent()){
-            if (pickedPonExists() && isMine(tile)) {
+            if (pickedPonNotExists() && isMine(tile)) {
               client.send(": /pick " + tile.getPlace() / 8 + " " + tile.getPlace() % 8);
-            } else if (!pickedPonExists()){
+            } else if (!pickedPonNotExists()){
               client.send(": /put " + tile.getPlace() / 8 + " " + tile.getPlace() % 8);
             }
           }
@@ -133,7 +133,7 @@ public class SpecificController extends AbstractController {
    * returns if any pon was picked
    * @return answer
    */
-  private boolean pickedPonExists() {
+  protected boolean pickedPonNotExists() {
     return ((SpecificModel) model).getBoard().getPicked() == null;
   }
 

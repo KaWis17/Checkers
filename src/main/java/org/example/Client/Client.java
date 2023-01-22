@@ -4,6 +4,7 @@ import java.io.*;
 import java.net.Socket;
 
 import org.example.Client.Controller.AbstractController;
+import org.example.Client.Controller.Bot.BotController;
 import org.example.Client.Controller.SpecificController;
 import org.example.Client.Model.AbstractModel;
 import org.example.Client.Model.SpecificModel;
@@ -22,10 +23,10 @@ public class Client {
 
   public AbstractController controller;
 
-  public void main(){
+  public void main(boolean isBot){
     view = new GameFrame();
     model = new SpecificModel();
-    controller = new SpecificController(this);
+    controller = isBot ? new BotController(this) : new SpecificController(this);
 
     controller.setModel(model);
     controller.setView(view);

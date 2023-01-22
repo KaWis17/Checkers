@@ -1,6 +1,7 @@
 package org.example.Client.Controller.Commands;
 
 import org.example.Client.Client;
+import org.example.Client.Model.SpecificModel;
 
 public class LocalStart extends OtherStart{
 

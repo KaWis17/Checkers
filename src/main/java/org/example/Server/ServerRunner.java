@@ -21,7 +21,7 @@ public class ServerRunner {
       }
       super.run();
       Client client =new Client();
-      client.main();
+      client.main(false);
     }
   }
 }

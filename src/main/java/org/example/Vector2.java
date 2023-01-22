@@ -77,6 +77,10 @@ public class Vector2 {
         setY(getY()+ otherVector.getY());
     }
 
+    public int manhattanDistance(Vector2 otherVector){
+        return Math.abs(getX()- otherVector.getX())+Math.abs(getY()- otherVector.getY());
+    }
+
     /**
      * function that checks if other vector has equal coordinates to this vector
      * @param otherVector other vector
