@@ -9,5 +9,6 @@
         </id>
 
         <property name = "isWhiteCurrent" column = "isWhiteCurrent" type = "boolean"/>
+        <property name = "board" column = "board" type = "text"/>
     </class>
 </hibernate-mapping>

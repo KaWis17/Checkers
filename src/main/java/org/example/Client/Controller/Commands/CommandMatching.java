@@ -73,6 +73,14 @@ public class CommandMatching {
             case "endgame" -> {
                 return new EndGame();
             }
+
+            case "save" -> {
+                return new Save();
+            }
+
+            case "load" -> {
+                return new Load();
+            }
         }
         return null;
     }

@@ -20,7 +20,6 @@ public class Notify extends AbstractCommand {
                 if(picked) tile.setColor('y');
                 else if(possible) tile.setColor('g');
                 tile.setState(state);
-
             }
         }
     }

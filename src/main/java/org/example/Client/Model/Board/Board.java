@@ -6,6 +6,17 @@ import org.example.Vector2;
  * class that represents board
  */
 public class Board {
+
+    String board;
+
+    public String getBoard() {
+        return board;
+    }
+
+    public void setBoard(String board) {
+        this.board = board;
+    }
+
     /**
      * boards tiles
      */
@@ -233,6 +244,7 @@ public class Board {
             }
             result.append("\n");
         }
+        //board = result.toString();
         return result.toString();
     }
 
