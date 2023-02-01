@@ -46,7 +46,7 @@ public class Rules {
             return;
         for(int i = 0; i < 8; i++){
             for(int j = 0; j < 8; j++){
-                board.getTiles()[i][j].setPicked( (chosen.getX() == i && chosen.getY() == j) );
+                board.getTiles()[i][j].setIsPicked( (chosen.getX() == i && chosen.getY() == j) );
             }
         }
         TileState picked = board.getPicked().getState();
@@ -68,7 +68,7 @@ public class Rules {
             case PON_1 -> pon1.move(chosenPos,board);
             case PON_2 -> pon2.move(chosenPos,board);
             case QUEEN_1,QUEEN_2 -> queen.move(chosenPos,board);
-            case EMPTY -> board.getPicked().setPicked(false);
+            case EMPTY -> board.getPicked().setIsPicked(false);
         }
     }
 }

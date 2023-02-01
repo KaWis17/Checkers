@@ -18,7 +18,7 @@ public class BotPon extends BotMove{
             for(int j=0;j<8;j++){
                 if( (board.getPicked().getState()== TileState.PON_1 || board.getPicked().getState()== TileState.PON_2)
                     && board.getPickedPos().manhattanDistance(new Vector2(i,j))==length
-                    && board.getTile(new Vector2(i,j)).isPossible())
+                    && board.getTile(new Vector2(i,j)).getIsPossible())
                     return new Vector2(i,j);
             }
         }

@@ -1,6 +1,5 @@
 package org.example.Client.Controller.Bot.BotMoves;
 
-import org.example.Client.Controller.Bot.BotMoves.BotMove;
 import org.example.Client.Model.Board.Board;
 import org.example.Client.Model.Board.TileState;
 import org.example.Vector2;
@@ -12,7 +11,7 @@ public Vector2 getWhereToPut(Board board) {
         for(int j=0;j<8;j++){
             if ((board.getPicked().getState() == TileState.PON_1 || board.getPicked().getState() == TileState.PON_2)
                 && (board.getPickedPos().manhattanDistance(new Vector2(i,j))==2 && (j==0||j==7) &&
-                board.getTile(i,j).isPossible())) {
+                board.getTile(i,j).getIsPossible())) {
                 return new Vector2(i,j);
             }
         }

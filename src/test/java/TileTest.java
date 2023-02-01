@@ -8,8 +8,8 @@ class TileTest {
   @Test
   void setPossible(){
     Tile tile = new Tile(false, TileState.PON_1);
-    tile.setPossible(true);
-    assertTrue(tile.isPossible());
+    tile.setIsPossible(true);
+    assertTrue(tile.getIsPossible());
   }
 
   @Test
@@ -29,7 +29,7 @@ class TileTest {
   @Test
   void setPicked(){
     Tile tile = new Tile(false, TileState.PON_1);
-    tile.setPicked(true);
-    assertTrue(tile.isPicked());
+    tile.setIsPicked(true);
+    assertTrue(tile.getIsPicked());
   }
 }

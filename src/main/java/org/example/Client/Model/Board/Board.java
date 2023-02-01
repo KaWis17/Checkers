@@ -9,11 +9,34 @@ public class Board {
     /**
      * boards tiles
      */
+    
+    private int id;
+
+    public Board() {
+        
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
     protected Tile[][] tiles = new Tile[8][8];
     /**
      * info about current player color
      */
     boolean isWhiteCurrent = true;
+
+    public void setIsWhiteCurrent(boolean whiteCurrent) {
+        isWhiteCurrent = whiteCurrent;
+    }
+
+    public boolean getIsWhiteCurrent() {
+        return isWhiteCurrent;
+    }
 
     /**
      * Board constructor
@@ -54,7 +77,7 @@ public class Board {
         for(int i=0;i<8;i++)
         {
             for(int j=0;j<8;j++) {
-                if(tiles[i][j].isPicked()) return new Vector2(i,j);
+                if(tiles[i][j].getIsPicked()) return new Vector2(i,j);
             }
         }
         return null;
@@ -193,7 +216,7 @@ public class Board {
     public void setAllTilesNotPossible() {
         for (int i = 0; i < 8; i++) {
             for (int j = 0; j < 8; j++) {
-                tiles[i][j].setPossible(false);
+                tiles[i][j].setIsPossible(false);
             }
         }
     }

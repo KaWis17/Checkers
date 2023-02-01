@@ -18,7 +18,7 @@ public class BotQueen extends BotMove{
             for(int j=0;j<8;j++){
                 if( (board.getPicked().getState()== TileState.QUEEN_1 || board.getPicked().getState()== TileState.QUEEN_2)
                     && (pacifist ? board.foundEmpty(new Vector2(i,j)) : board.opponents(board.getPicked().getState(),board.getTile(i,j).getState()))
-                    && board.getTile(new Vector2(i,j)).isPossible())
+                    && board.getTile(new Vector2(i,j)).getIsPossible())
                     return new Vector2(i,j);
             }
         }

@@ -38,7 +38,7 @@ public abstract class FigureMove {
     public void move(Vector2 chosenPos, Board board){
         Tile picked = board.getPicked();
         board.getTile(chosenPos).setState(picked.getState());
-        picked.setPicked(false);
+        picked.setIsPicked(false);
         picked.setState(TileState.EMPTY);
         board.setAllTilesNotPossible();
         board.negateCurrent();
@@ -86,7 +86,7 @@ public abstract class FigureMove {
     public void setPossibleMoves(Board board) {
         for(int i = 0; i < 8; i++){
             for (int j = 0; j < 8 ; j++) {
-                if(canMove(new Vector2(i,j),board)) board.getTile(new Vector2(i,j)).setPossible(true);
+                if(canMove(new Vector2(i,j),board)) board.getTile(new Vector2(i,j)).setIsPossible(true);
             }
         }
     }

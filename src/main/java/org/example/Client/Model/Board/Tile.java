@@ -4,10 +4,30 @@ package org.example.Client.Model.Board;
  * class that represents tile data
  */
 public class Tile {
+
+    private int id;
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
     /**
      * is tile white
      */
     private boolean isWhite;
+
+    public void setIsWhite(boolean white) {
+        isWhite = white;
+    }
+
+    public boolean getIsWhite(){
+        return isWhite;
+    }
+
     /**
      * is tile picked
      */
@@ -37,7 +57,7 @@ public class Tile {
      * setter for possible
      * @param isPossible is possible
      */
-    public void setPossible(boolean isPossible){
+    public void setIsPossible(boolean isPossible){
         this.isPossible=isPossible;
     }
 
@@ -69,7 +89,7 @@ public class Tile {
      * getter for picked
      * @return picked
      */
-    public boolean isPicked() {
+    public boolean getIsPicked() {
         return isPicked;
     }
 
@@ -77,7 +97,7 @@ public class Tile {
      * setter for picked
      * @param picked picked
      */
-    public void setPicked(boolean picked) {
+    public void setIsPicked(boolean picked) {
         isPicked = picked;
     }
 
@@ -91,7 +111,7 @@ public class Tile {
         return isPicked ? "{"+colorFlag+stateFlag+"}": isPossible ? "<"+colorFlag+stateFlag+">" : "["+colorFlag+stateFlag+"]";
     }
 
-    public boolean isPossible() {
+    public boolean getIsPossible() {
         return isPossible;
     }
 }

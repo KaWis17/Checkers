@@ -44,14 +44,14 @@ public class PonAttack extends FigureMove {
         Tile picked = board.getPicked();
         Vector2 pickedPos = board.getPickedPos();
         board.getTile(chosenPos).setState(picked.getState());
-        board.getTile(chosenPos).setPicked(true);
-        picked.setPicked(false);
+        board.getTile(chosenPos).setIsPicked(true);
+        picked.setIsPicked(false);
         picked.setState(TileState.EMPTY);
         board.getMiddleTile(chosenPos,pickedPos).setState(TileState.EMPTY);
         board.setAllTilesNotPossible();
         setPossibleMoves(board);
         if(!hasMove(board)){
-            board.getPicked().setPicked(false);
+            board.getPicked().setIsPicked(false);
             board.negateCurrent();
             board.changePonToQueen();
             board.setAllTilesNotPossible();

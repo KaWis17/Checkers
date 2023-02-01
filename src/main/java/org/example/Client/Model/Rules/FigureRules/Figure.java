@@ -35,7 +35,7 @@ public class Figure{
                 return;
             }
         }
-        board.getPicked().setPicked(false);
+        board.getPicked().setIsPicked(false);
         board.setAllTilesNotPossible();
     }
 

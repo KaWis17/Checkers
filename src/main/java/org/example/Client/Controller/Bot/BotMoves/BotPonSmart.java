@@ -14,7 +14,7 @@ public Vector2 getWhereToPut(Board board) {
                 &&board.getPickedPos().manhattanDistance(new Vector2(i,j))==4
                 && !(board.opponents(board.getPicked().getState(),board.getTile(i,j).getState()))
                 && board.foundEmpty(new Vector2((board.getPickedPos().getX()+i)/2,(board.getPickedPos().getY()+j)/2))
-                && board.getTile(new Vector2((board.getPickedPos().getX()+i)/2,(board.getPickedPos().getY()+j)/2)).isPossible())
+                && board.getTile(new Vector2((board.getPickedPos().getX()+i)/2,(board.getPickedPos().getY()+j)/2)).getIsPossible())
                     return new Vector2((board.getPickedPos().getX()+i)/2,(board.getPickedPos().getY()+j)/2);
         }
     }
